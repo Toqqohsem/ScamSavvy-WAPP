@@ -2,51 +2,619 @@
 SET XACT_ABORT ON;
 BEGIN TRANSACTION;
 IF EXISTS(SELECT 1 FROM Quizzes) OR EXISTS(SELECT 1 FROM Questions)
-BEGIN ROLLBACK; THROW 51000, 'Quiz seed requires empty quiz tables. Use the agreed full rebuild sequence.', 1; END;
+BEGIN
+    ROLLBACK;
+    THROW 51000, 'Quiz seed requires empty quiz tables. Use the agreed full rebuild sequence.', 1;
+END;
+
 SET IDENTITY_INSERT Quizzes ON;
-INSERT INTO Quizzes(QuizID,CategoryID,Title,Description,IsPublished) VALUES(1,1,N'Telecommunications scams knowledge check',N'Six questions on recognising warning signs and choosing a safer response.',1);
-INSERT INTO Quizzes(QuizID,CategoryID,Title,Description,IsPublished) VALUES(2,2,N'E-commerce fraud knowledge check',N'Six questions on recognising warning signs and choosing a safer response.',1);
-INSERT INTO Quizzes(QuizID,CategoryID,Title,Description,IsPublished) VALUES(3,3,N'Non-existent investment schemes knowledge check',N'Six questions on recognising warning signs and choosing a safer response.',1);
-INSERT INTO Quizzes(QuizID,CategoryID,Title,Description,IsPublished) VALUES(4,4,N'Non-existent loans knowledge check',N'Six questions on recognising warning signs and choosing a safer response.',1);
-INSERT INTO Quizzes(QuizID,CategoryID,Title,Description,IsPublished) VALUES(5,5,N'E-finance fraud knowledge check',N'Six questions on recognising warning signs and choosing a safer response.',1);
-INSERT INTO Quizzes(QuizID,CategoryID,Title,Description,IsPublished) VALUES(6,6,N'Love scams knowledge check',N'Six questions on recognising warning signs and choosing a safer response.',1);
+INSERT INTO Quizzes (
+    QuizID, CategoryID, Title, Description, IsPublished
+)
+VALUES (
+    1,
+    1,
+    N'Telecommunications scams knowledge check',
+    N'Six questions on recognising warning signs and choosing a safer response.',
+    1
+);
+
+INSERT INTO Quizzes (
+    QuizID, CategoryID, Title, Description, IsPublished
+)
+VALUES (
+    2,
+    2,
+    N'E-commerce fraud knowledge check',
+    N'Six questions on recognising warning signs and choosing a safer response.',
+    1
+);
+
+INSERT INTO Quizzes (
+    QuizID, CategoryID, Title, Description, IsPublished
+)
+VALUES (
+    3,
+    3,
+    N'Non-existent investment schemes knowledge check',
+    N'Six questions on recognising warning signs and choosing a safer response.',
+    1
+);
+
+INSERT INTO Quizzes (
+    QuizID, CategoryID, Title, Description, IsPublished
+)
+VALUES (
+    4,
+    4,
+    N'Non-existent loans knowledge check',
+    N'Six questions on recognising warning signs and choosing a safer response.',
+    1
+);
+
+INSERT INTO Quizzes (
+    QuizID, CategoryID, Title, Description, IsPublished
+)
+VALUES (
+    5,
+    5,
+    N'E-finance fraud knowledge check',
+    N'Six questions on recognising warning signs and choosing a safer response.',
+    1
+);
+
+INSERT INTO Quizzes (
+    QuizID, CategoryID, Title, Description, IsPublished
+)
+VALUES (
+    6,
+    6,
+    N'Love scams knowledge check',
+    N'Six questions on recognising warning signs and choosing a safer response.',
+    1
+);
+
 SET IDENTITY_INSERT Quizzes OFF;
 SET IDENTITY_INSERT Questions ON;
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(1,1,N'A caller claims to be a police officer and asks you to move your savings to a safe account. What should you do?',N'Transfer a small amount first',N'End the call and verify through an independently obtained official contact',N'Give the caller your online banking password',N'Keep the call secret','B',N'A claim of authority is not proof of identity. Verify the claim using a contact you obtain independently. Review the telecommunications scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(2,1,N'A parcel SMS asks for an OTP to release a delivery. Which information must remain private?',N'Your preferred delivery time',N'The parcel colour',N'Your OTP or TAC',N'The delivery company name','C',N'OTP and TAC codes authorise access or transactions. Do not disclose them to a caller or message sender. Review the telecommunications scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(3,1,N'Why might a scam caller say that you must act within ten minutes?',N'To help you compare options',N'To reduce your opportunity to check the claim',N'To prove they are an officer',N'To provide a customer service guarantee','B',N'A short deadline can pressure a person to act before checking. Pause and verify the request. Review the telecommunications scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(4,1,N'The caller knows your name. What does this establish?',N'The caller must work for your bank',N'The caller is definitely a family member',N'The caller has passed an identity check',N'It does not prove that the caller represents the claimed organisation','D',N'Knowing a name is not reliable authentication. Identity should be verified through the organisation itself. Review the telecommunications scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(5,1,N'Which contact should you use to check a suspicious bank call?',N'The number in the suspicious SMS',N'A number supplied by the caller',N'The contact shown in your official banking app or on your bank card',N'A number from a forwarded social post','C',N'Use a contact that is independent of the suspicious interaction, rather than one supplied by the sender. Review the telecommunications scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(6,1,N'What is the best response to a demand to keep a supposed police investigation secret from your bank?',N'Pause and independently verify the request',N'Move the money immediately',N'Give remote access to your phone',N'Delete the conversation and comply','A',N'Secrecy can isolate a potential victim. Do not make a transfer based solely on an unverified call. Review the telecommunications scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(7,2,N'A marketplace seller offers a large discount if you pay outside the platform. What is the safest response?',N'Pay quickly before stock runs out',N'Send your banking password',N'Check the seller and keep payment within the platform protection process',N'Assume a discount proves the seller is genuine','C',N'Leaving a platform can remove its transaction safeguards. Review the seller and the payment process before proceeding. Review the e-commerce fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(8,2,N'A buyer sends a payment screenshot but you see no credit in your account. What should you do?',N'Check your own bank or platform transaction record before releasing the item',N'Ship because screenshots cannot be edited',N'Refund the buyer immediately',N'Pay a fee to release the payment','A',N'A screenshot is not confirmation of cleared funds. Verify the transaction in your own account. Review the e-commerce fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(9,2,N'A seller asks you to share an OTP to confirm a purchase. Which response is appropriate?',N'Give the last three digits',N'Share it only once',N'Post it in the chat',N'Refuse and verify through the platform','D',N'A purchase conversation does not justify disclosing an authentication code. Review the e-commerce fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(10,2,N'A shop has many positive reviews but all were posted recently with identical wording. What should you conclude?',N'It is certainly safe',N'The reviews require further checking',N'The cheapest listing must be genuine',N'Review count guarantees delivery','B',N'Unusual review patterns are a reason to investigate. A high rating alone does not establish trustworthiness. Review the e-commerce fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(11,2,N'A seller says a bank account has no Semak Mule match. Is this proof that the transaction is safe?',N'Yes, every fraudulent account is already listed',N'Yes, if the seller sends a screenshot',N'No, a lack of recorded reports does not guarantee safety',N'Only if the item is expensive','C',N'A reporting database cannot establish that an unreported account is safe. Consider other evidence and use protected payment methods. Review the e-commerce fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(12,2,N'An item does not arrive and the seller disappears. Which evidence is useful to retain?',N'Only the item colour',N'Only your own username',N'Nothing after payment',N'Order details, messages and payment records','D',N'Transaction records and messages help explain what happened when contacting the platform, bank or police. Review the e-commerce fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(13,3,N'A message promises a guaranteed high return with no risk in a few hours. What is the main warning sign?',N'The message contains numbers',N'The investment has a name',N'The promised combination of rapid profit and no risk',N'The message is written in English','C',N'Extraordinary promises require scrutiny. Do not treat an attractive return claim as proof of a legitimate investment. Review the non-existent investment schemes lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(14,3,N'An investment promoter uses an official-looking logo. What should you do next?',N'Check the entity independently with the relevant regulator',N'Assume the logo proves authorisation',N'Transfer a test amount',N'Forward the offer to friends','A',N'Branding can be copied. Check authorisation independently instead of relying on an image supplied by a promoter. Review the non-existent investment schemes lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(15,3,N'A promoter will not explain how an investment generates income. What is the appropriate response?',N'Pay to receive the explanation later',N'Avoid committing money until the offer can be understood and verified',N'Let the promoter choose your password',N'Ignore the missing information','B',N'A decision should not depend on unexplained claims. Ask for clear information and verify the entity before committing. Review the non-existent investment schemes lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(16,3,N'Why should you be cautious about screenshots of large investment profits?',N'They always show audited accounts',N'They prove all investors can withdraw',N'They replace regulatory checks',N'They can be fabricated and do not prove legitimacy','D',N'An image of a balance or profit is not independent evidence that a scheme is authorised or funds can be withdrawn. Review the non-existent investment schemes lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(17,3,N'You are told to pay an extra fee to unlock a withdrawal from a suspicious scheme. What should you do?',N'Stop further payments and verify or report the situation',N'Pay because every withdrawal needs a fee',N'Borrow money to pay immediately',N'Give the promoter remote access','A',N'An additional payment demand can prolong a loss. Seek independent assistance rather than relying on the promoter. Review the non-existent investment schemes lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(18,3,N'Which action provides a stronger check than a forwarded investment advertisement?',N'Counting emojis in the advert',N'Asking the promoter to send another logo',N'Checking the relevant regulator website directly',N'Joining a second chat run by the same promoter','C',N'Independent regulatory checks are more useful than repeated information from the same unverified source. Review the non-existent investment schemes lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(19,4,N'A lender promises approval but demands a release fee before sending the loan. What is the warning sign?',N'The application has a title',N'Payment is demanded before the promised funds arrive',N'The message mentions a monthly instalment',N'The lender uses a greeting','B',N'Advance payment requests in an unverified loan offer need careful checking. Do not assume a fee guarantees disbursement. Review the non-existent loans lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(20,4,N'A loan advert claims that approval is guaranteed without checking any information. What should you do?',N'Treat guaranteed approval as proof',N'Share all banking credentials',N'Pay before reading the terms',N'Verify the lender independently before proceeding','D',N'An appealing approval claim does not replace checks on who is offering the loan and the terms involved. Review the non-existent loans lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(21,4,N'A caller offers a loan and asks for your bank login password. What should you do?',N'Refuse to provide the password',N'Give it if the loan amount is small',N'Send it in two messages',N'Change the password only after sharing','A',N'A loan enquiry does not justify disclosing a bank login password. Review the non-existent loans lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(22,4,N'A professional-looking loan agreement arrives through WhatsApp. What does its appearance prove?',N'That funds are guaranteed',N'That the sender is licensed',N'Nothing by itself about the sender legitimacy',N'That all requested fees are lawful','C',N'Documents can imitate professional formats. Verify the lender through an independent official channel. Review the non-existent loans lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(23,4,N'The lender asks for another fee after you have already paid one. What is the safest next step?',N'Pay until the lender is satisfied',N'Stop further payments, preserve records and seek independent help',N'Delete every record',N'Provide an OTP instead of money','B',N'Repeated demands can increase the loss. Retain the correspondence and payment information for enquiries or reporting. Review the non-existent loans lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(24,4,N'The caller says the offer ends today unless you pay immediately. How should this affect your decision?',N'It makes verification unnecessary',N'It guarantees the lowest interest rate',N'It proves the caller works for a bank',N'It is a reason to pause rather than rush','D',N'Time pressure should not prevent verification of an offer or its sender. Review the non-existent loans lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(25,5,N'An email says your bank account will be frozen unless you sign in through its link. What should you do?',N'Use your official banking app or an independently obtained bank contact',N'Sign in through the supplied link',N'Reply with your password',N'Forward your OTP to the sender','A',N'Access the service independently. A threatening email is not a reliable route to a banking login. Review the e-finance fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(26,5,N'An unfamiliar website has HTTPS and a padlock. What does that tell you?',N'The company is definitely genuine',N'The website has been approved by your bank',N'The connection is encrypted, but the site may still be fraudulent',N'You can safely disclose an OTP','C',N'Encryption protects a connection; it does not establish the identity or honesty of the operator. Review the e-finance fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(27,5,N'A support message asks you to install an APK sent in chat. What is the safer response?',N'Install it to inspect the icon',N'Avoid the file and check through the official service',N'Disable phone protections first',N'Give it all requested permissions','B',N'An unsolicited application file can expose your device. Obtain support through an independently verified service. Review the e-finance fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(28,5,N'You entered your banking password on a suspicious page. What should you do?',N'Wait for the sender to reply',N'Share a second password',N'Assume nothing can be done',N'Contact your bank promptly through an official channel and secure the account','D',N'Prompt contact allows the bank to advise on protective action. Do not keep interacting with the suspicious sender. Review the e-finance fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(29,5,N'Which domain is clearly a fictional example used in this training?',N'A link sent by a stranger',N'bank-secure.invalid',N'Any domain containing the word bank',N'Any address with a padlock','B',N'The .invalid address is used here as non-operational training text. In real messages, inspect the full address and verify independently. Review the e-finance fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(30,5,N'Someone claiming to be bank support asks for a TAC to reverse a transaction. What should you do?',N'Send it if the caller knows your name',N'Read half the code aloud',N'Refuse and contact your bank independently',N'Post it on the support forum','C',N'Do not disclose a transaction authentication code in response to a caller request, including a claimed reversal. Review the e-finance fraud lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(31,6,N'An online contact declares love quickly and then asks for emergency money. What should you do?',N'Send money to demonstrate trust',N'Treat the request cautiously and verify independently',N'Borrow money for them',N'Keep it secret from everyone','B',N'Emotional pressure and an urgent money request should prompt caution, especially where identity is unverified. Review the love scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(32,6,N'Why might a romance scammer repeatedly avoid a live video call?',N'Their identity may differ from the story they present',N'A text profile proves their identity',N'Refusing a call proves they are overseas',N'It means their bank account is verified','A',N'Avoiding independent identity checks leaves uncertainty. Do not accept a profile photograph as proof of identity. Review the love scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(33,6,N'An online partner asks you to pay a courier to release an expensive gift you did not request. What is the safer response?',N'Pay because the gift is valuable',N'Send your OTP as an alternative',N'Verify independently and do not pay solely on the contact claim',N'Share your bank login with the courier','C',N'A supposed gift can be used to justify unexpected payment demands. Verify the claim separately. Review the love scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(34,6,N'The contact asks you not to discuss their money request with your family. Why is this concerning?',N'It guarantees confidentiality',N'It proves a personal relationship',N'It reduces bank charges',N'It can discourage independent advice and isolate you','D',N'Secrecy can make pressure harder to recognise. Seek advice from someone you trust before acting. Review the love scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(35,6,N'A convincing profile photo is shown. How should you interpret it?',N'It is insufficient by itself to establish identity',N'It guarantees the profile is genuine',N'It means payment is safe',N'It replaces all other checks','A',N'A photograph alone cannot verify who controls an account. Other independent checks remain necessary. Review the love scams lesson.');
-INSERT INTO Questions(QuestionID,QuizID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectOption,Explanation) VALUES(36,6,N'You suspect that an online relationship is being used to obtain money. What should you retain?',N'Only compliments',N'Messages, profile details and payment records',N'Nothing because the relationship is private',N'Only the most recent emoji','B',N'Keep relevant records if you need to explain the situation or seek help. Stop further payments while checking the claim. Review the love scams lesson.');
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    1,
+    1,
+    N'A caller claims to be a police officer and asks you to move your savings to a safe account. What should you do?',
+    N'Transfer a small amount first',
+    N'End the call and verify through an independently obtained official contact',
+    N'Give the caller your online banking password',
+    N'Keep the call secret',
+    'B',
+    N'A claim of authority is not proof of identity. Verify the claim using a contact you obtain independently. Review the telecommunications scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    2,
+    1,
+    N'A parcel SMS asks for an OTP to release a delivery. Which information must remain private?',
+    N'Your preferred delivery time',
+    N'The parcel colour',
+    N'Your OTP or TAC',
+    N'The delivery company name',
+    'C',
+    N'OTP and TAC codes authorise access or transactions. Do not disclose them to a caller or message sender. Review the telecommunications scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    3,
+    1,
+    N'Why might a scam caller say that you must act within ten minutes?',
+    N'To help you compare options',
+    N'To reduce your opportunity to check the claim',
+    N'To prove they are an officer',
+    N'To provide a customer service guarantee',
+    'B',
+    N'A short deadline can pressure a person to act before checking. Pause and verify the request. Review the telecommunications scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    4,
+    1,
+    N'The caller knows your name. What does this establish?',
+    N'The caller must work for your bank',
+    N'The caller is definitely a family member',
+    N'The caller has passed an identity check',
+    N'It does not prove that the caller represents the claimed organisation',
+    'D',
+    N'Knowing a name is not reliable authentication. Identity should be verified through the organisation itself. Review the telecommunications scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    5,
+    1,
+    N'Which contact should you use to check a suspicious bank call?',
+    N'The number in the suspicious SMS',
+    N'A number supplied by the caller',
+    N'The contact shown in your official banking app or on your bank card',
+    N'A number from a forwarded social post',
+    'C',
+    N'Use a contact that is independent of the suspicious interaction, rather than one supplied by the sender. Review the telecommunications scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    6,
+    1,
+    N'What is the best response to a demand to keep a supposed police investigation secret from your bank?',
+    N'Pause and independently verify the request',
+    N'Move the money immediately',
+    N'Give remote access to your phone',
+    N'Delete the conversation and comply',
+    'A',
+    N'Secrecy can isolate a potential victim. Do not make a transfer based solely on an unverified call. Review the telecommunications scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    7,
+    2,
+    N'A marketplace seller offers a large discount if you pay outside the platform. What is the safest response?',
+    N'Pay quickly before stock runs out',
+    N'Send your banking password',
+    N'Check the seller and keep payment within the platform protection process',
+    N'Assume a discount proves the seller is genuine',
+    'C',
+    N'Leaving a platform can remove its transaction safeguards. Review the seller and the payment process before proceeding. Review the e-commerce fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    8,
+    2,
+    N'A buyer sends a payment screenshot but you see no credit in your account. What should you do?',
+    N'Check your own bank or platform transaction record before releasing the item',
+    N'Ship because screenshots cannot be edited',
+    N'Refund the buyer immediately',
+    N'Pay a fee to release the payment',
+    'A',
+    N'A screenshot is not confirmation of cleared funds. Verify the transaction in your own account. Review the e-commerce fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    9,
+    2,
+    N'A seller asks you to share an OTP to confirm a purchase. Which response is appropriate?',
+    N'Give the last three digits',
+    N'Share it only once',
+    N'Post it in the chat',
+    N'Refuse and verify through the platform',
+    'D',
+    N'A purchase conversation does not justify disclosing an authentication code. Review the e-commerce fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    10,
+    2,
+    N'A shop has many positive reviews but all were posted recently with identical wording. What should you conclude?',
+    N'It is certainly safe',
+    N'The reviews require further checking',
+    N'The cheapest listing must be genuine',
+    N'Review count guarantees delivery',
+    'B',
+    N'Unusual review patterns are a reason to investigate. A high rating alone does not establish trustworthiness. Review the e-commerce fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    11,
+    2,
+    N'A seller says a bank account has no Semak Mule match. Is this proof that the transaction is safe?',
+    N'Yes, every fraudulent account is already listed',
+    N'Yes, if the seller sends a screenshot',
+    N'No, a lack of recorded reports does not guarantee safety',
+    N'Only if the item is expensive',
+    'C',
+    N'A reporting database cannot establish that an unreported account is safe. Consider other evidence and use protected payment methods. Review the e-commerce fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    12,
+    2,
+    N'An item does not arrive and the seller disappears. Which evidence is useful to retain?',
+    N'Only the item colour',
+    N'Only your own username',
+    N'Nothing after payment',
+    N'Order details, messages and payment records',
+    'D',
+    N'Transaction records and messages help explain what happened when contacting the platform, bank or police. Review the e-commerce fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    13,
+    3,
+    N'A message promises a guaranteed high return with no risk in a few hours. What is the main warning sign?',
+    N'The message contains numbers',
+    N'The investment has a name',
+    N'The promised combination of rapid profit and no risk',
+    N'The message is written in English',
+    'C',
+    N'Extraordinary promises require scrutiny. Do not treat an attractive return claim as proof of a legitimate investment. Review the non-existent investment schemes lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    14,
+    3,
+    N'An investment promoter uses an official-looking logo. What should you do next?',
+    N'Check the entity independently with the relevant regulator',
+    N'Assume the logo proves authorisation',
+    N'Transfer a test amount',
+    N'Forward the offer to friends',
+    'A',
+    N'Branding can be copied. Check authorisation independently instead of relying on an image supplied by a promoter. Review the non-existent investment schemes lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    15,
+    3,
+    N'A promoter will not explain how an investment generates income. What is the appropriate response?',
+    N'Pay to receive the explanation later',
+    N'Avoid committing money until the offer can be understood and verified',
+    N'Let the promoter choose your password',
+    N'Ignore the missing information',
+    'B',
+    N'A decision should not depend on unexplained claims. Ask for clear information and verify the entity before committing. Review the non-existent investment schemes lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    16,
+    3,
+    N'Why should you be cautious about screenshots of large investment profits?',
+    N'They always show audited accounts',
+    N'They prove all investors can withdraw',
+    N'They replace regulatory checks',
+    N'They can be fabricated and do not prove legitimacy',
+    'D',
+    N'An image of a balance or profit is not independent evidence that a scheme is authorised or funds can be withdrawn. Review the non-existent investment schemes lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    17,
+    3,
+    N'You are told to pay an extra fee to unlock a withdrawal from a suspicious scheme. What should you do?',
+    N'Stop further payments and verify or report the situation',
+    N'Pay because every withdrawal needs a fee',
+    N'Borrow money to pay immediately',
+    N'Give the promoter remote access',
+    'A',
+    N'An additional payment demand can prolong a loss. Seek independent assistance rather than relying on the promoter. Review the non-existent investment schemes lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    18,
+    3,
+    N'Which action provides a stronger check than a forwarded investment advertisement?',
+    N'Counting emojis in the advert',
+    N'Asking the promoter to send another logo',
+    N'Checking the relevant regulator website directly',
+    N'Joining a second chat run by the same promoter',
+    'C',
+    N'Independent regulatory checks are more useful than repeated information from the same unverified source. Review the non-existent investment schemes lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    19,
+    4,
+    N'A lender promises approval but demands a release fee before sending the loan. What is the warning sign?',
+    N'The application has a title',
+    N'Payment is demanded before the promised funds arrive',
+    N'The message mentions a monthly instalment',
+    N'The lender uses a greeting',
+    'B',
+    N'Advance payment requests in an unverified loan offer need careful checking. Do not assume a fee guarantees disbursement. Review the non-existent loans lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    20,
+    4,
+    N'A loan advert claims that approval is guaranteed without checking any information. What should you do?',
+    N'Treat guaranteed approval as proof',
+    N'Share all banking credentials',
+    N'Pay before reading the terms',
+    N'Verify the lender independently before proceeding',
+    'D',
+    N'An appealing approval claim does not replace checks on who is offering the loan and the terms involved. Review the non-existent loans lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    21,
+    4,
+    N'A caller offers a loan and asks for your bank login password. What should you do?',
+    N'Refuse to provide the password',
+    N'Give it if the loan amount is small',
+    N'Send it in two messages',
+    N'Change the password only after sharing',
+    'A',
+    N'A loan enquiry does not justify disclosing a bank login password. Review the non-existent loans lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    22,
+    4,
+    N'A professional-looking loan agreement arrives through WhatsApp. What does its appearance prove?',
+    N'That funds are guaranteed',
+    N'That the sender is licensed',
+    N'Nothing by itself about the sender legitimacy',
+    N'That all requested fees are lawful',
+    'C',
+    N'Documents can imitate professional formats. Verify the lender through an independent official channel. Review the non-existent loans lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    23,
+    4,
+    N'The lender asks for another fee after you have already paid one. What is the safest next step?',
+    N'Pay until the lender is satisfied',
+    N'Stop further payments, preserve records and seek independent help',
+    N'Delete every record',
+    N'Provide an OTP instead of money',
+    'B',
+    N'Repeated demands can increase the loss. Retain the correspondence and payment information for enquiries or reporting. Review the non-existent loans lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    24,
+    4,
+    N'The caller says the offer ends today unless you pay immediately. How should this affect your decision?',
+    N'It makes verification unnecessary',
+    N'It guarantees the lowest interest rate',
+    N'It proves the caller works for a bank',
+    N'It is a reason to pause rather than rush',
+    'D',
+    N'Time pressure should not prevent verification of an offer or its sender. Review the non-existent loans lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    25,
+    5,
+    N'An email says your bank account will be frozen unless you sign in through its link. What should you do?',
+    N'Use your official banking app or an independently obtained bank contact',
+    N'Sign in through the supplied link',
+    N'Reply with your password',
+    N'Forward your OTP to the sender',
+    'A',
+    N'Access the service independently. A threatening email is not a reliable route to a banking login. Review the e-finance fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    26,
+    5,
+    N'An unfamiliar website has HTTPS and a padlock. What does that tell you?',
+    N'The company is definitely genuine',
+    N'The website has been approved by your bank',
+    N'The connection is encrypted, but the site may still be fraudulent',
+    N'You can safely disclose an OTP',
+    'C',
+    N'Encryption protects a connection; it does not establish the identity or honesty of the operator. Review the e-finance fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    27,
+    5,
+    N'A support message asks you to install an APK sent in chat. What is the safer response?',
+    N'Install it to inspect the icon',
+    N'Avoid the file and check through the official service',
+    N'Disable phone protections first',
+    N'Give it all requested permissions',
+    'B',
+    N'An unsolicited application file can expose your device. Obtain support through an independently verified service. Review the e-finance fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    28,
+    5,
+    N'You entered your banking password on a suspicious page. What should you do?',
+    N'Wait for the sender to reply',
+    N'Share a second password',
+    N'Assume nothing can be done',
+    N'Contact your bank promptly through an official channel and secure the account',
+    'D',
+    N'Prompt contact allows the bank to advise on protective action. Do not keep interacting with the suspicious sender. Review the e-finance fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    29,
+    5,
+    N'Which domain is clearly a fictional example used in this training?',
+    N'A link sent by a stranger',
+    N'bank-secure.invalid',
+    N'Any domain containing the word bank',
+    N'Any address with a padlock',
+    'B',
+    N'The .invalid address is used here as non-operational training text. In real messages, inspect the full address and verify independently. Review the e-finance fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    30,
+    5,
+    N'Someone claiming to be bank support asks for a TAC to reverse a transaction. What should you do?',
+    N'Send it if the caller knows your name',
+    N'Read half the code aloud',
+    N'Refuse and contact your bank independently',
+    N'Post it on the support forum',
+    'C',
+    N'Do not disclose a transaction authentication code in response to a caller request, including a claimed reversal. Review the e-finance fraud lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    31,
+    6,
+    N'An online contact declares love quickly and then asks for emergency money. What should you do?',
+    N'Send money to demonstrate trust',
+    N'Treat the request cautiously and verify independently',
+    N'Borrow money for them',
+    N'Keep it secret from everyone',
+    'B',
+    N'Emotional pressure and an urgent money request should prompt caution, especially where identity is unverified. Review the love scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    32,
+    6,
+    N'Why might a romance scammer repeatedly avoid a live video call?',
+    N'Their identity may differ from the story they present',
+    N'A text profile proves their identity',
+    N'Refusing a call proves they are overseas',
+    N'It means their bank account is verified',
+    'A',
+    N'Avoiding independent identity checks leaves uncertainty. Do not accept a profile photograph as proof of identity. Review the love scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    33,
+    6,
+    N'An online partner asks you to pay a courier to release an expensive gift you did not request. What is the safer response?',
+    N'Pay because the gift is valuable',
+    N'Send your OTP as an alternative',
+    N'Verify independently and do not pay solely on the contact claim',
+    N'Share your bank login with the courier',
+    'C',
+    N'A supposed gift can be used to justify unexpected payment demands. Verify the claim separately. Review the love scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    34,
+    6,
+    N'The contact asks you not to discuss their money request with your family. Why is this concerning?',
+    N'It guarantees confidentiality',
+    N'It proves a personal relationship',
+    N'It reduces bank charges',
+    N'It can discourage independent advice and isolate you',
+    'D',
+    N'Secrecy can make pressure harder to recognise. Seek advice from someone you trust before acting. Review the love scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    35,
+    6,
+    N'A convincing profile photo is shown. How should you interpret it?',
+    N'It is insufficient by itself to establish identity',
+    N'It guarantees the profile is genuine',
+    N'It means payment is safe',
+    N'It replaces all other checks',
+    'A',
+    N'A photograph alone cannot verify who controls an account. Other independent checks remain necessary. Review the love scams lesson.'
+);
+
+INSERT INTO Questions (
+    QuestionID, QuizID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectOption, Explanation
+)
+VALUES (
+    36,
+    6,
+    N'You suspect that an online relationship is being used to obtain money. What should you retain?',
+    N'Only compliments',
+    N'Messages, profile details and payment records',
+    N'Nothing because the relationship is private',
+    N'Only the most recent emoji',
+    'B',
+    N'Keep relevant records if you need to explain the situation or seek help. Stop further payments while checking the claim. Review the love scams lesson.'
+);
+
 SET IDENTITY_INSERT Questions OFF;
 COMMIT;
