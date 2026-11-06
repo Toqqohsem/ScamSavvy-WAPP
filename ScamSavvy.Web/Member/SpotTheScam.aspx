@@ -1,29 +1,7 @@
 ﻿<%@ Page Title="Spot the Scam | Scam Savvy" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="SpotTheScam.aspx.cs" Inherits="Member_SpotTheScam" %>
 <asp:Content ID="HeadContent" ContentPlaceHolderID="head" runat="server">
 <style>
-.quiz-hero {
-    display:flex;
-    gap:32px;
-    align-items:center;
-    justify-content:space-between;
-    padding:34px 38px;
-    border:1px solid #d6e7dc;
-    border-radius:20px;
-    background:#eaf4ed;
-    margin-bottom:28px
-}
-.quiz-hero p {
-    max-width:620px;
-    color:#506a5e;
-    margin-bottom:0
-}
-.quiz-hero .quiz-symbol {
-    font-size:78px;
-    font-weight:800;
-    color:#398575;
-    line-height:1;
-    padding:10px
-}
+
 .quiz-grid-cards {
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
@@ -73,15 +51,7 @@
     font-size:11px;
     font-weight:700
 }
-.quiz-filter {
-    display:flex;
-    gap:14px;
-    align-items:center;
-    flex-wrap:wrap
-}
-.quiz-filter select {
-    max-width:380px
-}
+
 .quiz-card {
     border:1px solid #d6e2d9;
     border-radius:12px;
@@ -89,40 +59,7 @@
     margin:20px 0;
     background:white
 }
-.quiz-muted {
-    color:#526a5b
-}
-.quiz-options label {
-    display:inline-block;
-    margin-left:10px;
-    padding:8px 0
-}
-.quiz-options table,.quiz-options td {
-    border:0
-}
-.quiz-wrong {
-    border-left:5px solid #ac3043
-}
-.quiz-correct {
-    border-left:5px solid #28865a
-}
-.quiz-field {
-    margin-bottom:16px
-}
-.quiz-field label {
-    display:block;
-    font-weight:600;
-    margin-bottom:6px
-}
-.quiz-grid {
-    overflow-x:auto;
-    margin:20px 0;
-    border-radius:10px;
-    border:1px solid #d8e4dc
-}
-.quiz-grid table {
-    min-width:650px
-}
+
 .quiz-phone {
     max-width:560px;
     margin:24px auto;
@@ -182,23 +119,7 @@
 .quiz-whatsapp {
     background:#e8f0e6
 }
-.quiz-section-head {
-    margin-top:34px;
-    padding-top:12px;
-    border-top:1px solid #d4e2d8
-}
-.quiz-admin-tip {
-    padding:12px 16px;
-    background:#edf4ef;
-    border-radius:8px;
-    font-size:14px
-}
-.quiz-selected-row td {
-    background:#e4f2e9
-}
-.quiz-grid a {
-    font-weight:600
-}
+
 @media(max-width:960px) {
     .quiz-grid-cards {
         grid-template-columns:repeat(2,minmax(0,1fr))
@@ -209,12 +130,7 @@
         grid-template-columns:1fr;
         gap:14px
     }
-    .quiz-hero {
-        padding:24px
-    }
-    .quiz-hero .quiz-symbol {
-        display:none
-    }
+
     .quiz-tile {
         min-height:225px
     }
@@ -225,35 +141,9 @@
     .quiz-card {
         padding:18px
     }
-    .quiz-filter {
-        display:block
-    }
-    .quiz-filter select {
-        margin-top:8px
-    }
-    .quiz-options label {
-        max-width:85%
-    }
+
 }
-.scenario-filters {
-    display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-    align-items:end;
-    margin:24px 0
-}
-.scenario-filters .scenario-filter-field {
-    flex:1 1 240px
-}
-.scenario-filters label {
-    display:block;
-    margin-bottom:6px;
-    font-weight:600
-}
-.scenario-filter-actions {
-    display:flex;
-    gap:8px
-}
+
 .scenario-results {
     display:block;
     color:#526a5b
@@ -338,29 +228,7 @@
 .quiz-tile .quiz-cta {
     color:#0b2545
 }
-.quiz-score {
-    padding:10px 12px;
-    border-radius:7px;
-    font-weight:700;
-    min-height:44px;
-    margin-top:8px
-}
-.quiz-score-pass {
-    color:#14623d;
-    background:#e7f4ec
-}
-.quiz-score-fail {
-    color:#a52531;
-    background:#fff0f1
-}
-.quiz-score-new {
-    color:#53647a;
-    background:#f0f3f7
-}
-.member3-results {
-    display:block;
-    color:#5b6b80
-}
+
 @media(max-width:600px) {
     .member3-slide {
         padding:28px 44px;
