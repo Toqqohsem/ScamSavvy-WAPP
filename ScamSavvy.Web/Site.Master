@@ -1,0 +1,104 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.Master.cs" Inherits="SiteMaster" %>
+<%-- Owner: Member 2. Baseline layout set up by Ahmad so everyone can build inside it.
+     Restyle freely, but keep the two ContentPlaceHolders (head, MainContent), the single form,
+     the menu contract and the logout button. --%>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scam Savvy</title>
+    <link href="~/Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Styles/site.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server" class="ss-shell">
+        <a class="visually-hidden-focusable" href="#main">Skip to main content</a>
+
+        <nav class="navbar navbar-expand-lg navbar-dark ss-navbar">
+            <div class="container">
+                <asp:HyperLink ID="lnkBrand" runat="server" NavigateUrl="~/Default.aspx" CssClass="navbar-brand fw-bold">
+                    Scam <span class="ss-brand-accent">Savvy</span>
+                </asp:HyperLink>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><asp:HyperLink ID="lnkHome" runat="server" NavigateUrl="~/Default.aspx" CssClass="nav-link" Text="Home" /></li>
+                        <li class="nav-item"><asp:HyperLink ID="lnkLessons" runat="server" NavigateUrl="~/Lessons.aspx" CssClass="nav-link" Text="Lessons" /></li>
+                        <li class="nav-item"><asp:HyperLink ID="lnkQuizzes" runat="server" NavigateUrl="~/Quizzes.aspx" CssClass="nav-link" Text="Quizzes" /></li>
+                        <li class="nav-item"><asp:HyperLink ID="lnkRepository" runat="server" NavigateUrl="~/ScamRepository.aspx" CssClass="nav-link" Text="Scam Repository" /></li>
+                        <li class="nav-item"><asp:HyperLink ID="lnkChecker" runat="server" NavigateUrl="~/ScamChecker.aspx" CssClass="nav-link" Text="Scam Checker" /></li>
+
+                        <asp:PlaceHolder ID="phMember" runat="server">
+                            <li class="nav-item"><asp:HyperLink ID="lnkSpotTheScam" runat="server" NavigateUrl="~/Member/SpotTheScam.aspx" CssClass="nav-link" Text="Spot the Scam" /></li>
+                            <li class="nav-item"><asp:HyperLink ID="lnkReportScam" runat="server" NavigateUrl="~/Member/ReportScam.aspx" CssClass="nav-link" Text="Report a Scam" /></li>
+                        </asp:PlaceHolder>
+
+                        <asp:PlaceHolder ID="phAdmin" runat="server">
+                            <li class="nav-item dropdown">
+                                <a id="lnkAdminMenu" runat="server" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                                <ul class="dropdown-menu">
+                                    <li><asp:HyperLink ID="lnkAdminDashboard" runat="server" NavigateUrl="~/Admin/Dashboard.aspx" CssClass="dropdown-item" Text="Dashboard" /></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><asp:HyperLink ID="lnkAdminUsers" runat="server" NavigateUrl="~/Admin/ManageUsers.aspx" CssClass="dropdown-item" Text="Users" /></li>
+                                    <li><asp:HyperLink ID="lnkAdminCategories" runat="server" NavigateUrl="~/Admin/ManageCategories.aspx" CssClass="dropdown-item" Text="Categories" /></li>
+                                    <li><asp:HyperLink ID="lnkAdminLessons" runat="server" NavigateUrl="~/Admin/ManageLessons.aspx" CssClass="dropdown-item" Text="Lessons" /></li>
+                                    <li><asp:HyperLink ID="lnkAdminQuizzes" runat="server" NavigateUrl="~/Admin/ManageQuizzes.aspx" CssClass="dropdown-item" Text="Quizzes" /></li>
+                                    <li><asp:HyperLink ID="lnkAdminScenarios" runat="server" NavigateUrl="~/Admin/ManageScenarios.aspx" CssClass="dropdown-item" Text="Scenarios" /></li>
+                                    <li><asp:HyperLink ID="lnkAdminReports" runat="server" NavigateUrl="~/Admin/ModerateReports.aspx" CssClass="dropdown-item" Text="Reports" /></li>
+                                    <li><asp:HyperLink ID="lnkAdminRedFlags" runat="server" NavigateUrl="~/Admin/ManageRedFlags.aspx" CssClass="dropdown-item" Text="Red Flags" /></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <asp:PlaceHolder ID="phGuest" runat="server">
+                            <li class="nav-item"><asp:HyperLink ID="lnkLogin" runat="server" NavigateUrl="~/Login.aspx" CssClass="nav-link" Text="Log in" /></li>
+                            <li class="nav-item"><asp:HyperLink ID="lnkRegister" runat="server" NavigateUrl="~/Register.aspx" CssClass="nav-link" Text="Register" /></li>
+                        </asp:PlaceHolder>
+
+                        <asp:PlaceHolder ID="phAccount" runat="server">
+                            <li class="nav-item dropdown">
+                                <a id="lnkAccountMenu" runat="server" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <asp:Literal ID="litUserName" runat="server" Mode="Encode" />
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><asp:HyperLink ID="lnkMyProgress" runat="server" NavigateUrl="~/Member/MyProgress.aspx" CssClass="dropdown-item" Text="My Progress" /></li>
+                                    <li><asp:HyperLink ID="lnkMyReports" runat="server" NavigateUrl="~/Member/MyReports.aspx" CssClass="dropdown-item" Text="My Reports" /></li>
+                                    <li><asp:HyperLink ID="lnkMyProfile" runat="server" NavigateUrl="~/Member/MyProfile.aspx" CssClass="dropdown-item" Text="My Profile" /></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" Text="Log out"
+                                        CausesValidation="false" OnClick="btnLogout_Click" /></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main id="main" class="container py-4">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </main>
+
+        <footer class="ss-footer py-4 mt-auto">
+            <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+                <p class="mb-0">
+                    Been scammed? Call <span class="ss-hotline">997</span>, the National Scam Response Centre, 24 hours.
+                    Check accounts and numbers on
+                    <a href="https://semakmule.rmp.gov.my/" target="_blank" rel="noopener">PDRM Semak Mule</a>.
+                </p>
+                <p class="mb-0 small">&copy; 2026 Scam Savvy &middot; CT050-3-2 WAPP, LAB-36 Group 07</p>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>

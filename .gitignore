@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Database files are built from Database/*.sql on each laptop, never committed
+ScamSavvy.Web/App_Data/*.mdf
+ScamSavvy.Web/App_Data/*.ldf
+
+# Screenshots uploaded through Report a Scam
+ScamSavvy.Web/Uploads/Evidence/*
+!ScamSavvy.Web/Uploads/Evidence/.gitkeep
+
+# OS clutter
+Thumbs.db
+.DS_Store

@@ -1,0 +1,123 @@
+/* Owner: Member 2. Baseline set up by Ahmad. Shared styles only; page-only styles go in that
+   page's <style> block in the head placeholder. Loaded after bootstrap.min.css. */
+
+:root {
+    --ss-navy: #0b2545;
+    --ss-navy-hover: #13315c;
+    --ss-amber: #f4a300;
+    --ss-surface: #ffffff;
+    --ss-bg: #f4f6fa;
+    --ss-muted: #5b6b80;
+}
+
+body {
+    background: var(--ss-bg);
+}
+
+/* Sticky footer: the master page's form wraps nav, main and footer. */
+.ss-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navigation */
+.ss-navbar {
+    background: var(--ss-navy);
+}
+
+.ss-brand-accent {
+    color: var(--ss-amber);
+}
+
+.ss-navbar .nav-link.active {
+    color: #fff;
+    box-shadow: inset 0 -2px 0 var(--ss-amber);
+}
+
+/* Buttons follow the site colours */
+.btn-primary {
+    --bs-btn-bg: var(--ss-navy);
+    --bs-btn-border-color: var(--ss-navy);
+    --bs-btn-hover-bg: var(--ss-navy-hover);
+    --bs-btn-hover-border-color: var(--ss-navy-hover);
+    --bs-btn-active-bg: var(--ss-navy-hover);
+    --bs-btn-active-border-color: var(--ss-navy-hover);
+    --bs-btn-disabled-bg: var(--ss-navy);
+    --bs-btn-disabled-border-color: var(--ss-navy);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--ss-navy);
+    --bs-btn-border-color: var(--ss-navy);
+    --bs-btn-hover-bg: var(--ss-navy);
+    --bs-btn-hover-border-color: var(--ss-navy);
+    --bs-btn-active-bg: var(--ss-navy);
+    --bs-btn-active-border-color: var(--ss-navy);
+}
+
+/* Cards and headings */
+.ss-card {
+    background: var(--ss-surface);
+    border: 0;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(11, 37, 69, 0.08), 0 4px 16px rgba(11, 37, 69, 0.04);
+}
+
+.ss-page-header {
+    margin-bottom: 1.5rem;
+}
+
+.ss-page-header p {
+    color: var(--ss-muted);
+    margin-bottom: 0;
+}
+
+.ss-stat {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ss-navy);
+}
+
+.ss-stat-label {
+    color: var(--ss-muted);
+    font-size: 0.875rem;
+}
+
+/* Forms: validator messages sit under their field */
+.ss-form .text-danger {
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Tables built with GridView */
+.ss-table {
+    background: var(--ss-surface);
+}
+
+.ss-table th {
+    white-space: nowrap;
+}
+
+/* Footer */
+.ss-footer {
+    background: var(--ss-navy);
+    color: #cfd8e3;
+}
+
+.ss-footer a {
+    color: #fff;
+}
+
+.ss-hotline {
+    color: var(--ss-amber);
+    font-weight: 700;
+}
+
+/* Labels for seeded example content */
+.ss-badge-sample {
+    background: #fff3cd;
+    color: #664d03;
+}
