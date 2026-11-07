@@ -277,8 +277,10 @@ public partial class Admin_ManageScenarios : AdminPage
         values["SenderName"] = Convert.ToString(values["SenderName"]).Trim();
 
         int category;
+        // Any category that exists, including ones admins add later (integration fix: was "1 to 6 only")
         if (!int.TryParse(Convert.ToString(values["CategoryID"]), out category) || category < 1 ||
-            category > 6)
+            Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM Categories WHERE CategoryID = @CategoryID",
+                Db.P("@CategoryID", category))) == 0)
             return false;
         if (!new List<string> { "SMS", "WhatsApp", "Email", "Call" }.Contains(
                 Convert.ToString(values["Channel"])))

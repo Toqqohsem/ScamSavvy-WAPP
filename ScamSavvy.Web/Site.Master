@@ -66,6 +66,7 @@
                                             <li><asp:HyperLink ID="lnkAdminScenarios" runat="server" NavigateUrl="~/Admin/ManageScenarios.aspx" CssClass="dropdown-item">Scenarios</asp:HyperLink></li>
                                             <li><asp:HyperLink ID="lnkAdminReports" runat="server" NavigateUrl="~/Admin/ModerateReports.aspx" CssClass="dropdown-item">Reports</asp:HyperLink></li>
                                             <li><asp:HyperLink ID="lnkAdminRedFlags" runat="server" NavigateUrl="~/Admin/ManageRedFlags.aspx" CssClass="dropdown-item">Red Flags</asp:HyperLink></li>
+                                            <li><asp:HyperLink ID="lnkAdminFeedback" runat="server" NavigateUrl="~/Admin/ManageFeedback.aspx" CssClass="dropdown-item">Feedback</asp:HyperLink></li>
                                         </ul>
                                     </li>
                                 </asp:PlaceHolder>
@@ -120,6 +121,7 @@
                             Check a phone number or bank account on
                             <a href="https://semakmule.rmp.gov.my/" target="_blank" rel="noopener noreferrer">Semak Mule (PDRM)</a>
                         </p>
+                        <p class="small mb-1"><asp:HyperLink ID="lnkFeedback" runat="server" NavigateUrl="~/Feedback.aspx">Send us feedback</asp:HyperLink></p>
                         <p class="small mb-0">&copy; <asp:Literal ID="litYear" runat="server" /> Scam Savvy &middot; LAB-36 Group 07 &middot; Asia Pacific University</p>
                     </div>
                 </div>

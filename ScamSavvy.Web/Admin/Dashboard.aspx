@@ -65,6 +65,14 @@
                 </div></div>
             </asp:HyperLink>
         </div>
+        <div class="col-6 col-lg-3">
+            <asp:HyperLink ID="lnkFeedbackCard" runat="server" NavigateUrl="~/Admin/ManageFeedback.aspx" CssClass="admin-card-link admin-pending">
+                <div class="card ss-card h-100"><div class="card-body">
+                    <div class="ss-stat"><asp:Literal ID="litPendingFeedback" runat="server" /></div>
+                    <div class="ss-stat-label">Feedback waiting for review</div>
+                </div></div>
+            </asp:HyperLink>
+        </div>
     </div>
 
     <div class="row g-4 mb-4">
@@ -112,5 +120,6 @@
         <asp:HyperLink ID="lnkScenarios" runat="server" NavigateUrl="~/Admin/ManageScenarios.aspx" CssClass="btn btn-outline-primary" Text="Scenarios" />
         <asp:HyperLink ID="lnkReports" runat="server" NavigateUrl="~/Admin/ModerateReports.aspx" CssClass="btn btn-outline-primary" Text="Scam reports" />
         <asp:HyperLink ID="lnkRedFlags" runat="server" NavigateUrl="~/Admin/ManageRedFlags.aspx" CssClass="btn btn-outline-primary" Text="Red-flag keywords" />
+        <asp:HyperLink ID="lnkFeedbackAdmin" runat="server" NavigateUrl="~/Admin/ManageFeedback.aspx" CssClass="btn btn-outline-primary" Text="Feedback" />
     </div>
 </asp:Content>

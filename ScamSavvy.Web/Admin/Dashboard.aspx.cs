@@ -28,7 +28,8 @@ public partial class Admin_Dashboard : AdminPage
             " (SELECT COUNT(*) FROM QuizAttempts) AS QuizAttempts," +
             " (SELECT COUNT(*) FROM ScenarioAttempts) AS ScenarioAttempts," +
             " (SELECT COUNT(*) FROM ScamReports WHERE Status = 'Pending') AS PendingReports," +
-            " (SELECT COUNT(*) FROM ScamReports WHERE Status = 'Approved') AS ApprovedReports").Rows[0];
+            " (SELECT COUNT(*) FROM ScamReports WHERE Status = 'Approved') AS ApprovedReports," +
+            " (SELECT COUNT(*) FROM Feedback WHERE Status = 'Pending') AS PendingFeedback").Rows[0];
 
         litTotalUsers.Text = c["TotalUsers"].ToString();
         litUsersByRole.Text = Count(c["Members"], "member") + ", " +
@@ -38,6 +39,7 @@ public partial class Admin_Dashboard : AdminPage
         litScenarioAttempts.Text = c["ScenarioAttempts"].ToString();
         litPendingReports.Text = c["PendingReports"].ToString();
         litApprovedReports.Text = c["ApprovedReports"].ToString();
+        litPendingFeedback.Text = c["PendingFeedback"].ToString();
     }
 
     private static string Count(object value, string noun)

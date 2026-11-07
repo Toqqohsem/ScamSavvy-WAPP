@@ -10,7 +10,7 @@ public partial class Admin_ManageLessons : AdminPage
 {
     // Same rule as lessonCheckContent() in the page's script block
     private static readonly Regex UnsafeHtml = new Regex(
-        @"<\s*(script|iframe|object|embed|form)\b|\son\w+\s*=|javascript\s*:",
+        @"<\s*(script|iframe|object|embed|form)\b|[\s/""']on\w+\s*=|javascript\s*:",
         RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     protected void Page_Init(object sender, EventArgs e)
@@ -205,7 +205,8 @@ public partial class Admin_ManageLessons : AdminPage
 
     protected void cuvContent_ServerValidate(object source, ServerValidateEventArgs args)
     {
-        args.IsValid = !UnsafeHtml.IsMatch(args.Value ?? "");
+        // Decode entities first, so "javascript&#58;" is caught too (integration fix)
+        args.IsValid = !UnsafeHtml.IsMatch(HttpUtility.HtmlDecode(args.Value ?? ""));
     }
 
     protected void cuvImage_ServerValidate(object source, ServerValidateEventArgs args)
@@ -321,11 +322,12 @@ public partial class Admin_ManageLessons : AdminPage
             LessonHelpers.DeleteLessonImage(Server, oldImagePath);
         }
 
+        bool published = chkPublished.Checked;   // read before ClearForm() unticks it (integration fix)
         ClearForm();
         pnlForm.Visible = false;
         BindGrid();
         ShowMessage((isNew ? "Lesson added" : "Lesson updated")
-            + (chkPublished.Checked ? "." : " as a draft. Tick Published when it is ready."), true);
+            + (published ? "." : " as a draft. Tick Published when it is ready."), true);
     }
 
     private string SaveUploadedImage()

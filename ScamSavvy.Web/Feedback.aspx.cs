@@ -1,145 +1,53 @@
+// Owner: Lyu Jiaxin (Feedback module). Rebuilt on the team template by Ahmad during integration.
 using System;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
-using System.Text;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
-namespace ScamSavvy
+public partial class Feedback : System.Web.UI.Page
 {
-    public partial class Feedback : Page
+    protected void Page_Load(object sender, EventArgs e)
     {
-        private string ConnStr =>
-            ConfigurationManager.ConnectionStrings["ScamSavvyDB"]?.ConnectionString
-            ?? @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ScamSavvy.mdf;Integrated Security=True";
+        if (IsPostBack || !Auth.IsLoggedIn) return;
 
-        protected void Page_Load(object sender, EventArgs e)
+        // Logged-in members get their name and email filled in.
+        DataTable t = Db.Query("SELECT Name, Email, Mobile FROM Users WHERE UserID = @UserID",
+            Db.P("@UserID", Auth.CurrentUserId));
+        if (t.Rows.Count == 1)
         {
-            if (!IsPostBack)
-            {
-                // Pre-fill name/email if the user is logged in (session placeholders)
-                if (Session["UserName"] != null)
-                    txtName.Value = Session["UserName"].ToString();
-                if (Session["UserEmail"] != null)
-                    txtEmail.Value = Session["UserEmail"].ToString();
-            }
+            txtName.Text = (string)t.Rows[0]["Name"];
+            txtEmail.Text = (string)t.Rows[0]["Email"];
+            txtPhone.Text = (string)t.Rows[0]["Mobile"];
+        }
+    }
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        if (!Page.IsValid) return;
+
+        string phone = txtPhone.Text.Trim();
+        Db.Execute(
+            "INSERT INTO Feedback (UserID, Name, Email, Phone, Category, Rating, Message) " +
+            "VALUES (@UserID, @Name, @Email, @Phone, @Category, @Rating, @Message)",
+            Db.P("@UserID", Auth.IsLoggedIn ? (object)Auth.CurrentUserId : null),
+            Db.P("@Name", txtName.Text.Trim()),
+            Db.P("@Email", txtEmail.Text.Trim().ToLowerInvariant()),
+            Db.P("@Phone", phone.Length == 0 ? null : phone),
+            Db.P("@Category", ddlCategory.SelectedValue),
+            Db.P("@Rating", int.Parse(rblRating.SelectedValue)),
+            Db.P("@Message", txtFeedback.Text.Trim()));
+
+        // Keep the member's details, clear the rest for a possible second message.
+        ddlCategory.SelectedIndex = 0;
+        rblRating.ClearSelection();
+        txtFeedback.Text = "";
+        if (!Auth.IsLoggedIn)
+        {
+            txtName.Text = "";
+            txtEmail.Text = "";
+            txtPhone.Text = "";
         }
 
-        protected void btnSubmit_Click(object sender, EventArgs e)
-        {
-            // Clear previous messages
-            pnlServerError.Visible = false;
-            pnlSuccess.Visible = false;
-            litServerErrors.Text = "";
-
-            // ---- Server-side validation ----
-            var errors = new StringBuilder();
-            string name = txtName.Value?.Trim() ?? "";
-            string email = txtEmail.Value?.Trim() ?? "";
-            string phone = txtPhone.Value?.Trim() ?? "";
-            string category = ddlCategory.Value ?? "";
-            string message = txtMessage.Value?.Trim() ?? "";
-            string rating = GetSelectedRating();
-
-            if (string.IsNullOrWhiteSpace(name) || name.Length < 2)
-                errors.Append("<li>Full name must be at least 2 characters.</li>");
-
-            if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
-                errors.Append("<li>A valid email address is required.</li>");
-
-            if (!string.IsNullOrWhiteSpace(phone) && !IsValidPhone(phone))
-                errors.Append("<li>Phone number must be 7–20 digits (may include +, -, spaces, parentheses).</li>");
-
-            if (string.IsNullOrWhiteSpace(category))
-                errors.Append("<li>Please select a feedback category.</li>");
-
-            if (string.IsNullOrWhiteSpace(message) || message.Length < 10)
-                errors.Append("<li>Message must be at least 10 characters.</li>");
-
-            if (string.IsNullOrWhiteSpace(rating))
-                errors.Append("<li>Please choose an overall rating (1–5 stars).</li>");
-
-            if (errors.Length > 0)
-            {
-                litServerErrors.Text = "<ul>" + errors + "</ul>";
-                pnlServerError.Visible = true;
-                return;
-            }
-
-            // ---- Save to database ----
-            try
-            {
-                using (var conn = new SqlConnection(ConnStr))
-                using (var cmd = new SqlCommand(@"
-                    INSERT INTO Feedback
-                        (Name, Email, Phone, Category, Rating, Message, Status, SubmittedOn)
-                    VALUES
-                        (@Name, @Email, @Phone, @Category, @Rating, @Message, 'Pending', GETDATE())", conn))
-                {
-                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 120).Value = name;
-                    cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 200).Value = email;
-                    cmd.Parameters.Add("@Phone", SqlDbType.NVarChar, 40).Value = (object)phone ?? DBNull.Value;
-                    cmd.Parameters.Add("@Category", SqlDbType.NVarChar, 80).Value = category;
-                    cmd.Parameters.Add("@Rating", SqlDbType.Int).Value = int.Parse(rating);
-                    cmd.Parameters.Add("@Message", SqlDbType.NVarChar, -1).Value = message;
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-
-                // Clear fields after successful save
-                txtName.Value = "";
-                txtEmail.Value = "";
-                txtPhone.Value = "";
-                ddlCategory.Value = "";
-                txtMessage.Value = "";
-                ClearRatingSelection();
-
-                pnlSuccess.Visible = true;
-            }
-            catch (Exception ex)
-            {
-                // In production, log ex and show a friendly message.
-                litServerErrors.Text = "<ul><li>Sorry, we couldn't save your feedback right now. Please try again later.</li></ul>";
-                pnlServerError.Visible = true;
-            }
-        }
-
-        private string GetSelectedRating()
-        {
-            // Find the selected radio button in the rating group
-            if (star5.Checked) return "5";
-            if (star4.Checked) return "4";
-            if (star3.Checked) return "3";
-            if (star2.Checked) return "2";
-            if (star1.Checked) return "1";
-            return "";
-        }
-
-        private void ClearRatingSelection()
-        {
-            star5.Checked = false;
-            star4.Checked = false;
-            star3.Checked = false;
-            star2.Checked = false;
-            star1.Checked = false;
-        }
-
-        private static bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch { return false; }
-        }
-
-        private static bool IsValidPhone(string phone)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(
-                phone, @"^[0-9+\-\s()]{7,20}$");
-        }
+        lblMessage.Text = "Thank you. Your feedback has been sent and our team will review it.";
+        lblMessage.CssClass = "alert alert-success d-block";
+        lblMessage.Visible = true;
     }
 }

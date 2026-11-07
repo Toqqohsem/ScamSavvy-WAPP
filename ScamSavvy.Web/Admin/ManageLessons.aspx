@@ -204,7 +204,7 @@
     <script>
         // Client half of cuvContent; the server repeats the same check in cuvContent_ServerValidate.
         function lessonCheckContent(source, args) {
-            args.IsValid = !/<\s*(script|iframe|object|embed|form)\b|\son\w+\s*=|javascript\s*:/i.test(args.Value);
+            args.IsValid = !/<\s*(script|iframe|object|embed|form)\b|[\s\/"']on\w+\s*=|javascript\s*:/i.test(args.Value);
         }
     </script>
 

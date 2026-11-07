@@ -239,7 +239,7 @@
 <asp:Panel ID="pnlFilters" runat="server" DefaultButton="btnSearch" CssClass="member3-filters">
 <div class="filter-search">
 <asp:Label runat="server" AssociatedControlID="txtSearch" Text="Search" />
-<asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" MaxLength="100" placeholder="Search quizzes, categories or question text" />
+<asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" MaxLength="100" ValidateRequestMode="Disabled" placeholder="Search quizzes, categories or question text" />
 </div>
 <div class="filter-category">
 <asp:Label runat="server" AssociatedControlID="ddlCategory" Text="Scam category" />

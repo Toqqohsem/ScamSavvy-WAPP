@@ -1,6 +1,6 @@
 /* ============================================================================
    Scam Savvy - 01_Schema.sql                                      Owner: Ahmad
-   Drops and recreates all 13 tables. Running it wipes every table, so run the
+   Drops and recreates all 14 tables. Running it wipes every table, so run the
    seed scripts 02 to 08 straight after it, in order.
 
    How to run: Server Explorer > right-click ScamSavvy.mdf > New Query >
@@ -14,6 +14,7 @@
    ============================================================================ */
 
 -- Drop in reverse dependency order
+IF OBJECT_ID('dbo.Feedback', 'U') IS NOT NULL DROP TABLE dbo.Feedback;
 IF OBJECT_ID('dbo.QuizAnswers', 'U') IS NOT NULL DROP TABLE dbo.QuizAnswers;
 IF OBJECT_ID('dbo.QuizAttempts', 'U') IS NOT NULL DROP TABLE dbo.QuizAttempts;
 IF OBJECT_ID('dbo.Questions', 'U') IS NOT NULL DROP TABLE dbo.Questions;
@@ -192,5 +193,23 @@ CREATE TABLE dbo.RedFlagKeywords (
     Language     CHAR(2) NOT NULL CONSTRAINT CK_RedFlagKeywords_Language CHECK (Language IN ('EN', 'BM')),
     Weight       INT NOT NULL CONSTRAINT CK_RedFlagKeywords_Weight CHECK (Weight BETWEEN 1 AND 3),
     Explanation  NVARCHAR(300) NOT NULL
+);
+GO
+
+/* ---------- Feedback (Lyu Jiaxin) ---------- */
+CREATE TABLE dbo.Feedback (
+    FeedbackID  INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Feedback PRIMARY KEY,
+    UserID      INT NULL CONSTRAINT FK_Feedback_Users
+                REFERENCES dbo.Users (UserID) ON DELETE SET NULL,   -- set when a logged-in member sends it
+    Name        NVARCHAR(100)  NOT NULL,
+    Email       NVARCHAR(150)  NOT NULL,
+    Phone       NVARCHAR(20)   NULL,
+    Category    NVARCHAR(30)   NOT NULL CONSTRAINT CK_Feedback_Category
+                CHECK (Category IN ('General', 'Lessons', 'Quizzes', 'SpotTheScam', 'ScamRepository', 'Bug', 'Suggestion')),
+    Rating      INT NOT NULL CONSTRAINT CK_Feedback_Rating CHECK (Rating BETWEEN 1 AND 5),
+    Message     NVARCHAR(2000) NOT NULL,
+    Status      NVARCHAR(20)   NOT NULL CONSTRAINT DF_Feedback_Status DEFAULT 'Pending'
+                CONSTRAINT CK_Feedback_Status CHECK (Status IN ('Pending', 'Reviewed', 'Resolved', 'Rejected')),
+    CreatedAt   DATETIME NOT NULL CONSTRAINT DF_Feedback_CreatedAt DEFAULT GETDATE()
 );
 GO
