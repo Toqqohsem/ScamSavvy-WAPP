@@ -119,7 +119,6 @@
         <asp:HyperLink ID="lnkQuizzes" runat="server" NavigateUrl="~/Admin/ManageQuizzes.aspx" CssClass="btn btn-outline-primary" Text="Quizzes" />
         <asp:HyperLink ID="lnkScenarios" runat="server" NavigateUrl="~/Admin/ManageScenarios.aspx" CssClass="btn btn-outline-primary" Text="Scenarios" />
         <asp:HyperLink ID="lnkReports" runat="server" NavigateUrl="~/Admin/ModerateReports.aspx" CssClass="btn btn-outline-primary" Text="Scam reports" />
-        <asp:HyperLink ID="lnkRedFlags" runat="server" NavigateUrl="~/Admin/ManageRedFlags.aspx" CssClass="btn btn-outline-primary" Text="Red-flag keywords" />
         <asp:HyperLink ID="lnkFeedbackAdmin" runat="server" NavigateUrl="~/Admin/ManageFeedback.aspx" CssClass="btn btn-outline-primary" Text="Feedback" />
     </div>
 </asp:Content>

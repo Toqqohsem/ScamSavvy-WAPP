@@ -65,7 +65,6 @@
                                             <li><asp:HyperLink ID="lnkAdminQuizzes" runat="server" NavigateUrl="~/Admin/ManageQuizzes.aspx" CssClass="dropdown-item">Quizzes</asp:HyperLink></li>
                                             <li><asp:HyperLink ID="lnkAdminScenarios" runat="server" NavigateUrl="~/Admin/ManageScenarios.aspx" CssClass="dropdown-item">Scenarios</asp:HyperLink></li>
                                             <li><asp:HyperLink ID="lnkAdminReports" runat="server" NavigateUrl="~/Admin/ModerateReports.aspx" CssClass="dropdown-item">Reports</asp:HyperLink></li>
-                                            <li><asp:HyperLink ID="lnkAdminRedFlags" runat="server" NavigateUrl="~/Admin/ManageRedFlags.aspx" CssClass="dropdown-item">Red Flags</asp:HyperLink></li>
                                             <li><asp:HyperLink ID="lnkAdminFeedback" runat="server" NavigateUrl="~/Admin/ManageFeedback.aspx" CssClass="dropdown-item">Feedback</asp:HyperLink></li>
                                         </ul>
                                     </li>
@@ -80,7 +79,6 @@
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountMenu">
                                             <li><asp:HyperLink ID="lnkMyProgress" runat="server" NavigateUrl="~/Member/MyProgress.aspx" CssClass="dropdown-item">My Progress</asp:HyperLink></li>
-                                            <li><asp:HyperLink ID="lnkMyReports" runat="server" NavigateUrl="~/Member/MyReports.aspx" CssClass="dropdown-item">My Reports</asp:HyperLink></li>
                                             <li><asp:HyperLink ID="lnkMyProfile" runat="server" NavigateUrl="~/Member/MyProfile.aspx" CssClass="dropdown-item">My Profile</asp:HyperLink></li>
                                             <li><hr class="dropdown-divider" /></li>
                                             <li><asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" CausesValidation="false" OnClick="btnLogout_Click">Log out</asp:LinkButton></li>
