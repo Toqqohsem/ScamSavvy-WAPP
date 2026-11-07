@@ -166,6 +166,7 @@
     flex:1
 }
 .member3-slide h1,.member3-slide h2 {
+    color:#fff; /* integration: site.css makes headings navy, which hid this text on the navy banner */
     font-size:clamp(28px,3.4vw,44px);
     font-weight:700;
     margin:12px 0

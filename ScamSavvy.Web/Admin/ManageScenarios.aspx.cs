@@ -50,6 +50,10 @@ public partial class Admin_ManageScenarios : AdminPage
         HideReadOnlyCommands(dvChild);
         lblHeaderFeedback.Text = lblMessage.Visible && ActiveDialog != "" ? lblMessage.Text : "";
         lblQuestionFeedback.Text = lblHeaderFeedback.Text;
+        // Integration: show "Change saved" in green and errors in red (the labels were always red)
+        string feedbackClass = lblMessage.CssClass.Contains("alert-success") ? "text-success d-block" : "text-danger d-block";
+        lblHeaderFeedback.CssClass = feedbackClass;
+        lblQuestionFeedback.CssClass = feedbackClass;
         if (ActiveDialog != "")
             ClientScript.RegisterStartupScript(GetType(), "openQuizDialog",
                 "document.addEventListener('DOMContentLoaded',function(){bootstrap.Modal.getOrCreateInstance(document.getElementById('" + ActiveDialog + "')).show();});", true);
