@@ -1,20 +1,4 @@
-/* ============================================================================
-   Scam Savvy - 07_Seed_ScamReports.sql                  Owner: Lyu Jiaxin (Member 4)
-   Sample scam reports: three approved cases per category (shown in the
-   repository and used by the Scam Checker), plus two pending reports for the
-   Moderate Reports demo.
-
-   Every case is SAMPLE DATA (IsSample = 1, labelled on the site). The patterns
-   follow how these scams work in Malaysia, but the phone numbers, account
-   numbers and links are made up. Links use the reserved ".example" domain, which
-   can never be a real website.
-
-   Identifiers are stored normalised (see App_Code/ScamText.cs):
-     phone   60 + mobile without the leading 0, digits only
-     account digits only
-     link    lower case, no http(s)://, no www., no trailing slash
-   Run after 06_Seed_Scenarios.sql.
-   ============================================================================ */
+-- 07_Seed_ScamReports.sql (Lyu): sample scam reports, 18 approved and 2 pending.
 
 SET NOCOUNT ON;
 

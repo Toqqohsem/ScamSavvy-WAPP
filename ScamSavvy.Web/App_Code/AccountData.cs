@@ -1,10 +1,8 @@
-// Owner: Ahmad (Accounts module). Used by Member/MyProfile.aspx and Admin/ManageUsers.aspx.
 using System;
 using System.Data.SqlClient;
 
 public static class AccountData
 {
-    /// <summary>Active accounts with the Admin role.</summary>
     public static int CountActiveAdmins()
     {
         return Convert.ToInt32(Db.Scalar(
@@ -12,11 +10,6 @@ public static class AccountData
             Db.P("@Role", Auth.RoleAdmin)));
     }
 
-    /// <summary>
-    /// Deletes a user in one transaction. Their lesson progress, quiz and Spot the Scam attempts
-    /// cascade; their scam reports stay on the site with UserID set to NULL. ReviewedBy has no
-    /// cascade, so it is cleared first.
-    /// </summary>
     public static void DeleteUser(int userId)
     {
         using (SqlConnection conn = Db.Open())

@@ -1,11 +1,3 @@
-/* =====================================================================
-   Scam Savvy - shared stylesheet (external CSS)
-   Owner: Member 2. Loaded after bootstrap.min.css by Site.Master.
-   Page-only styles belong in that page's <style> block, prefixed by
-   module (account-, lesson-, quiz-, scam-). Ask Member 2 to add
-   anything that more than one page needs.
-   ===================================================================== */
-
 /* ---------- 1. Design tokens ---------- */
 :root {
     --ss-navy: #0f2a44;
@@ -47,7 +39,6 @@ body {
     line-height: 1.6;
 }
 
-/* The form wraps the whole page, so it must stretch for the sticky footer */
 body > form {
     display: flex;
     flex-direction: column;
@@ -300,8 +291,6 @@ a {
     color: var(--ss-muted);
 }
 
-/* ASP.NET validators (CssClass="text-danger", Display="Dynamic").
-   ASP.NET toggles their inline display style, so only size them here. */
 span.text-danger {
     font-size: 0.875rem;
 }
@@ -398,7 +387,6 @@ span.text-danger {
     }
 }
 
-/* ---------- 13. GridView pager (PagerStyle-CssClass="site-pager") ---------- */
 .site-pager td {
     background: var(--ss-surface);
     padding: 0.6rem 0.75rem !important;
@@ -429,9 +417,6 @@ span.text-danger {
     background: #e9eef5;
 }
 
-
-/* ---------- 14. Classes used by Ahmad's pages (Login, Register, My Profile, Admin) ----------
-   Kept from the baseline site.css so those pages look the same; mapped to the tokens above. */
 :root {
     --ss-navy-hover: var(--ss-navy-2);
 }

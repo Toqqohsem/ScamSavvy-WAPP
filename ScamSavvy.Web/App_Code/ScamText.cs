@@ -1,6 +1,3 @@
-// Owner: Lyu Jiaxin (Member 4: scam repository, reporting and Scam Checker).
-// Every phone number, account number and link is normalised here before it is saved and
-// before it is searched, so a report and a pasted message always compare the same way.
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,21 +5,17 @@ using System.Text.RegularExpressions;
 
 public static class ScamText
 {
-    // Malaysian mobile numbers: 01X-XXX XXXX or 011-XXXX XXXX, optionally +60 / 60 (with or without a space) instead of 0.
     private static readonly Regex PhonePattern = new Regex(
         @"(?<![\d+])(?:\+?60[\s-]?|0)1\d[\s-]?\d{3,4}[\s-]?\d{4}(?!\d)", RegexOptions.Compiled);
 
-    // Bank account numbers: 10 to 16 digits, possibly written in groups with spaces or dashes.
     private static readonly Regex AccountPattern = new Regex(
         @"(?<!\d)\d(?:[\s-]?\d){9,15}(?!\d)", RegexOptions.Compiled);
 
-    // Links with a scheme or www., and bare domains on common scam TLDs (".example" is used by our sample data).
     private static readonly Regex UrlPattern = new Regex(
         @"\b(?:https?://|www\.)[^\s<>""']+" +
         @"|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|my|net|org|xyz|top|info|online|site|link|click|shop|app|cc|co|io|biz|live|example)(?:/[^\s<>""']*)?",
         RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-    /// <summary>"+60 12-345 6789", "012-3456789" and "60123456789" all become "60123456789".</summary>
     public static string NormalisePhone(string s)
     {
         string digits = DigitsOnly(s);
@@ -30,13 +23,11 @@ public static class ScamText
         return digits;
     }
 
-    /// <summary>Digits only.</summary>
     public static string NormaliseAccount(string s)
     {
         return DigitsOnly(s);
     }
 
-    /// <summary>Lower case, without http(s)://, www. or a trailing slash: "https://www.Pay-Now.example/" becomes "pay-now.example".</summary>
     public static string NormaliseUrl(string s)
     {
         string u = (s ?? "").Trim().ToLowerInvariant();
@@ -47,7 +38,6 @@ public static class ScamText
         return u;
     }
 
-    /// <summary>The domain part of a normalised link: "pay-now.example/login" becomes "pay-now.example".</summary>
     public static string Domain(string normalisedUrl)
     {
         string u = normalisedUrl ?? "";
@@ -65,7 +55,6 @@ public static class ScamText
         return found;
     }
 
-    /// <summary>Account numbers, ignoring anything that is a phone number.</summary>
     public static List<string> FindAccounts(string text)
     {
         string withoutPhones = PhonePattern.Replace(text ?? "", " ");
@@ -89,7 +78,6 @@ public static class ScamText
         return found;
     }
 
-    /// <summary>Shows a stored phone number the way Malaysians write it: "60123456789" becomes "012-345 6789".</summary>
     public static string FormatPhone(object stored)
     {
         string d = Convert.ToString(stored);

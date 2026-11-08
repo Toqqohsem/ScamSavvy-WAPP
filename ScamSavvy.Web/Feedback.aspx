@@ -1,5 +1,4 @@
 <%@ Page Title="Feedback | Scam Savvy" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Feedback.aspx.cs" Inherits="Feedback" %>
-<%-- Owner: Lyu Jiaxin (Feedback module). Rebuilt on the team template by Ahmad during integration. --%>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -89,7 +88,6 @@
 
                 <div class="col-12">
                     <asp:Label runat="server" AssociatedControlID="txtFeedback" CssClass="form-label">Your feedback <span class="text-danger">*</span></asp:Label>
-                    <%-- ValidateRequestMode off: people may type "<" or "<3" here. The text is only ever shown HTML-encoded. --%>
                     <asp:TextBox ID="txtFeedback" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" MaxLength="2000" ValidateRequestMode="Disabled"
                         placeholder="What did you find useful, what could be better, or what would you like to see next?" />
                     <asp:RequiredFieldValidator ID="rfvFeedback" runat="server" ControlToValidate="txtFeedback"

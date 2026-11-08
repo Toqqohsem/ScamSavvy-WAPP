@@ -1,10 +1,4 @@
-/* =====================================================================
-   03_Seed_Categories.sql  (owner: Member 2)
-   Six scam categories with FIXED IDs 1-6. Other seed scripts
-   (lessons, quizzes, scenarios, reports) refer to these IDs.
-   Run after 01_Schema.sql and 02_Seed_Users.sql.
-   Category names follow the PDRM CCID online-crime categories.
-   ===================================================================== */
+-- 03_Seed_Categories.sql (Arshia): the six PDRM scam categories.
 
 SET NOCOUNT ON;
 

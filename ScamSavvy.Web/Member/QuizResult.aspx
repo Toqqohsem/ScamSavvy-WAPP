@@ -32,7 +32,6 @@
 }
 
 @media(max-width:600px) {
-
     .quiz-card {
         padding:18px
     }
@@ -86,6 +85,5 @@
 </div>
 </asp:Panel>
 <asp:HyperLink runat="server" NavigateUrl="~/Quizzes.aspx" Text="Back to quizzes" />
-
 
 </asp:Content>

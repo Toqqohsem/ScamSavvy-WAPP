@@ -45,7 +45,6 @@ public partial class Member_SpotTheScam : MemberPage
                                              : channel == "Email"  ? "quiz-email"
                                              : channel == "Call"   ? "quiz-call"
                                                                    : "quiz-sms");
-        // Only visible text is bound before submission. Red-flag markers stay on the server.
         parts = new DataTable();
         using (SqlConnection con = Db.Open())
         using (

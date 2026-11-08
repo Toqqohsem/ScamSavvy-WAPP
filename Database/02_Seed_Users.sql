@@ -1,11 +1,4 @@
-/* ============================================================================
-   Scam Savvy - 02_Seed_Users.sql                                  Owner: Ahmad
-   Four test accounts at fixed IDs 1-4 (other seed scripts refer to these IDs).
-   Password for every account: Test@1234
-   Hashes are PBKDF2-SHA256, 100,000 rounds, 32 bytes, Base64 - the same as
-   Auth.HashPassword, so these accounts log in through the real Login page.
-   Run after 01_Schema.sql.
-   ============================================================================ */
+-- 02_Seed_Users.sql (Ahmad): test accounts, password Test@1234.
 
 SET IDENTITY_INSERT dbo.Users ON;
 

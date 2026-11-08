@@ -1,4 +1,5 @@
--- Member 3. Run after 01_Schema.sql through 04_Seed_Lessons.sql on a fresh development database.
+-- 05_Seed_Quizzes.sql (Cheng Beibei): one quiz per category, six questions each.
+
 SET XACT_ABORT ON;
 BEGIN TRANSACTION;
 IF EXISTS(SELECT 1 FROM Quizzes) OR EXISTS(SELECT 1 FROM Questions)

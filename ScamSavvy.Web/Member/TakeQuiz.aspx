@@ -20,7 +20,6 @@
 }
 
 @media(max-width:600px) {
-
     .quiz-card {
         padding:18px
     }
@@ -55,6 +54,5 @@
 <asp:Button ID="btnSubmit" runat="server" Text="Submit quiz" CssClass="btn btn-primary" ValidationGroup="Quiz" OnClick="btnSubmit_Click" />
 </asp:Panel>
 <asp:HyperLink runat="server" NavigateUrl="~/Quizzes.aspx" Text="Back to quizzes" CssClass="d-block mt-3" />
-
 
 </asp:Content>

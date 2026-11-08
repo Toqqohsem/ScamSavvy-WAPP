@@ -28,7 +28,6 @@
             <asp:Panel ID="pnlInput" runat="server" CssClass="site-card checker-input" DefaultButton="btnCheck">
                 <div class="site-card-body p-4">
                     <asp:Label runat="server" AssociatedControlID="txtMessage" CssClass="form-label" Text="Message to check" />
-                    <%-- ValidateRequestMode off: scam messages often contain links or "<". The text is only ever shown HTML-encoded. --%>
                     <asp:TextBox ID="txtMessage" runat="server" CssClass="form-control" TextMode="MultiLine" MaxLength="2000"
                         ValidateRequestMode="Disabled" placeholder="Paste the message here" />
                     <asp:RequiredFieldValidator ID="rfvMessage" runat="server" ControlToValidate="txtMessage" ValidationGroup="Check"

@@ -1,3 +1,5 @@
+-- 06_Seed_Scenarios.sql (Cheng Beibei): Spot the Scam messages and their red flags.
+
 -- Member 3. Run after 05_Seed_Quizzes.sql on a fresh development database.
 SET XACT_ABORT ON;
 BEGIN TRANSACTION;

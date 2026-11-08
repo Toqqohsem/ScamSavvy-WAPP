@@ -16,8 +16,6 @@ public partial class Admin_ManageUsers : AdminPage
         }
     }
 
-    // The filter last applied with Search or Clear. Edit, Delete and paging rebind with this,
-    // not with whatever is currently typed in the search box.
     private string AppliedSearch
     {
         get { return (ViewState["AppliedSearch"] as string) ?? ""; }
@@ -71,7 +69,6 @@ public partial class Admin_ManageUsers : AdminPage
         int userId = (int)DataBinder.Eval(e.Row.DataItem, "UserID");
         if (userId != Auth.CurrentUserId) return;
 
-        // An admin cannot change their own role or status, or delete themselves, from here.
         SetVisible(e.Row, "btnEdit", false);
         SetVisible(e.Row, "btnDelete", false);
         SetVisible(e.Row, "lblYou", true);

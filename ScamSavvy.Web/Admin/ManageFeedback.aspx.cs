@@ -1,4 +1,3 @@
-// Owner: Lyu Jiaxin (Feedback module). Rebuilt on the team template by Ahmad during integration.
 using System;
 using System.Data;
 using System.Web.UI.WebControls;

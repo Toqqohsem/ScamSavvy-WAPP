@@ -2,7 +2,6 @@
 using System;
 using System.Web;
 
-/// <summary>Any logged-in user. Logged-out visitors are sent to Login and brought back afterwards.</summary>
 public class MemberPage : System.Web.UI.Page
 {
     protected override void OnInit(EventArgs e)

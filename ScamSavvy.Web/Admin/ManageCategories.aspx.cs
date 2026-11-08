@@ -16,8 +16,6 @@ public partial class Admin_ManageCategories : AdminPage
         }
     }
 
-    // ---------- Display ----------
-
     private void BindGrid()
     {
         // The counts show admins why a delete would be blocked before they try it
@@ -40,8 +38,6 @@ public partial class Admin_ManageCategories : AdminPage
         gvCategories.DataSource = table;
         gvCategories.DataBind();
     }
-
-    // ---------- Insert ----------
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
@@ -90,8 +86,6 @@ public partial class Admin_ManageCategories : AdminPage
         BindGrid();
         ShowMessage("Category \"" + name + "\" added.", true);
     }
-
-    // ---------- Update ----------
 
     protected void gvCategories_RowEditing(object sender, GridViewEditEventArgs e)
     {
@@ -158,11 +152,9 @@ public partial class Admin_ManageCategories : AdminPage
         ShowMessage("Category \"" + name + "\" updated.", true);
     }
 
-    // ---------- Delete ----------
-
     protected void gvCategories_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        e.Cancel = true; // the grid has no data source control; we delete ourselves below
+        e.Cancel = true;
         int categoryId = (int)gvCategories.DataKeys[e.RowIndex].Value;
 
         // Check usage on the server, never trust the counts already on screen
@@ -221,7 +213,7 @@ public partial class Admin_ManageCategories : AdminPage
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 547) // foreign key: something was added between the check and the delete
+                if (ex.Number == 547)
                 {
                     ShowMessage("\"" + name + "\" is now in use and cannot be deleted.", false);
                     BindGrid();
@@ -235,8 +227,6 @@ public partial class Admin_ManageCategories : AdminPage
             ShowMessage("Category \"" + name + "\" deleted.", true);
         }
     }
-
-    // ---------- Helpers ----------
 
     private static void AddFields(SqlCommand cmd, string name, string description, int sortOrder)
     {

@@ -1,6 +1,3 @@
-// Owner: Lyu Jiaxin (Member 4)
-// Admins approve or reject members' scam reports. Only approved reports appear in the public
-// repository and count as "reported" in the Scam Checker.
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -88,7 +85,6 @@ public partial class Admin_ModerateReports : AdminPage
         }
     }
 
-    /// <summary>Removes the screenshot file, but only if it sits in the evidence folder.</summary>
     private void DeleteEvidence(string path)
     {
         if (string.IsNullOrEmpty(path) || !path.StartsWith(EvidenceFolder)) return;

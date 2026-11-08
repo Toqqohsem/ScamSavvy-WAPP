@@ -8,7 +8,6 @@ public partial class Lesson : System.Web.UI.Page
 {
     private int lessonId;
 
-    // Load on every request so the page is complete after the Mark as complete postback too.
     protected void Page_Load(object sender, EventArgs e)
     {
         lessonId = LessonHelpers.QueryInt(Request, "id");
@@ -34,7 +33,6 @@ public partial class Lesson : System.Web.UI.Page
 
     private bool LoadLesson()
     {
-        // Admins may preview an unpublished lesson from Manage Lessons; everyone else gets "not found".
         const string sql = @"
             SELECT l.LessonID, l.CategoryID, l.Title, l.Summary, l.KeyPoints, l.Content,
                    l.ImagePath, l.VideoUrl, l.SourceTitle, l.SourceUrl, l.IsPublished,
@@ -85,7 +83,7 @@ public partial class Lesson : System.Web.UI.Page
         lnkCrumbCategory.Text = HttpUtility.HtmlEncode(categoryName);
         lnkCrumbCategory.NavigateUrl = "~/Lessons.aspx?category=" + categoryId;
 
-        // ...except Content, which only admins can write (security rule in section 12).
+        // Content is HTML written by admins only, so it is not encoded
         litContent.Text = content;
 
         rptKeyPoints.DataSource = LessonHelpers.SplitKeyPoints(row["KeyPoints"]);
@@ -114,7 +112,6 @@ public partial class Lesson : System.Web.UI.Page
 
     private void ShowVideo(string url, string title)
     {
-        // Re-check the pattern on output, so a bad value in the database never becomes an iframe
         if (string.IsNullOrWhiteSpace(url) || !LessonHelpers.YouTubeEmbed.IsMatch(url))
         {
             phVideo.Visible = false;
@@ -186,7 +183,7 @@ public partial class Lesson : System.Web.UI.Page
 
         if (!Auth.IsLoggedIn)
         {
-            // Back to this lesson after logging in (build guide section 8)
+            // Back to this lesson after logging in
             Response.Redirect("~/Login.aspx?returnUrl=" + HttpUtility.UrlEncode(Request.RawUrl), false);
             Context.ApplicationInstance.CompleteRequest();
             return;
@@ -215,7 +212,7 @@ public partial class Lesson : System.Web.UI.Page
         }
         catch (SqlException ex)
         {
-            if (ex.Number != 2627) // 2627 = the row was added by a double click; treat as done
+            if (ex.Number != 2627)
             {
                 throw;
             }

@@ -72,7 +72,6 @@
 
             <div class="col-12">
                 <asp:Label ID="lblContent" runat="server" AssociatedControlID="txtContent" CssClass="form-label" Text="Content (HTML)" />
-                <%-- ValidateRequestMode="Disabled" lets this one box accept HTML; the page is admin-only --%>
                 <asp:TextBox ID="txtContent" runat="server" CssClass="form-control lesson-admin-content" TextMode="MultiLine" Rows="14"
                     ValidateRequestMode="Disabled" />
                 <div class="form-text">Use &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;/&lt;ol&gt;/&lt;li&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;blockquote&gt; and &lt;a&gt;. Scripts, iframes and event attributes are rejected.</div>

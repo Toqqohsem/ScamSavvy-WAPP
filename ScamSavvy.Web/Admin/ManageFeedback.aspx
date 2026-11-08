@@ -1,5 +1,4 @@
 <%@ Page Title="Manage Feedback | Scam Savvy" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="ManageFeedback.aspx.cs" Inherits="Admin_ManageFeedback" %>
-<%-- Owner: Lyu Jiaxin (Feedback module). Rebuilt on the team template by Ahmad during integration. --%>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="head" runat="server">
     <style>

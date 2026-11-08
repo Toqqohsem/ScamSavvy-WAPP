@@ -5,7 +5,6 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <%-- YouTube embeds need the site's address in the Referer header (avoids "Error 153") --%>
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="description" content="Scam Savvy helps Malaysians recognise, avoid and report online scams." />
     <title>Scam Savvy</title>

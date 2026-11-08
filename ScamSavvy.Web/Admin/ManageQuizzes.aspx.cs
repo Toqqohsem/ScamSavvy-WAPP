@@ -50,7 +50,6 @@ public partial class Admin_ManageQuizzes : AdminPage
         HideReadOnlyCommands(dvChild);
         lblHeaderFeedback.Text = lblMessage.Visible && ActiveDialog != "" ? lblMessage.Text : "";
         lblQuestionFeedback.Text = lblHeaderFeedback.Text;
-        // Integration: show "Change saved" in green and errors in red (the labels were always red)
         string feedbackClass = lblMessage.CssClass.Contains("alert-success") ? "text-success d-block" : "text-danger d-block";
         lblHeaderFeedback.CssClass = feedbackClass;
         lblQuestionFeedback.CssClass = feedbackClass;
@@ -277,7 +276,6 @@ public partial class Admin_ManageQuizzes : AdminPage
         values["Description"] = Convert.ToString(values["Description"]).Trim();
 
         int category;
-        // Any category that exists, including ones admins add later (integration fix: was "1 to 6 only")
         if (!int.TryParse(Convert.ToString(values["CategoryID"]), out category) || category < 1 ||
             Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM Categories WHERE CategoryID = @CategoryID",
                 Db.P("@CategoryID", category))) == 0)

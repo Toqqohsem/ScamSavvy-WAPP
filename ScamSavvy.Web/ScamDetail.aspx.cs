@@ -1,6 +1,3 @@
-// Owner: Lyu Jiaxin (Member 4)
-// Approved reports are public. A pending or rejected report is shown only to the person who sent it
-// and to admins; everyone else gets "Report not found".
 using System;
 using System.Data;
 

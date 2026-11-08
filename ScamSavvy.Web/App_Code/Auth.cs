@@ -5,19 +5,14 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.SessionState;
 
-/// <summary>
-/// Login state, roles and password hashing. Pages never read Session[...] directly; they call Auth.
-/// </summary>
 public static class Auth
 {
     public const string RoleMember = "Member";
     public const string RoleContributor = "Contributor";
     public const string RoleAdmin = "Admin";
 
-    /// <summary>Failed logins in a row before the account is locked.</summary>
     public const int MaxFailedLogins = 5;
 
-    /// <summary>How long a lock lasts. An admin can unlock early from Manage Users.</summary>
     public const int LockoutMinutes = 15;
 
     private const string KeyUserId = "UserID";
@@ -44,7 +39,6 @@ public static class Auth
         get { return CurrentUserId > 0; }
     }
 
-    /// <summary>0 when logged out.</summary>
     public static int CurrentUserId
     {
         get
@@ -59,7 +53,6 @@ public static class Auth
         get { return (Read(KeyUserName) as string) ?? ""; }
     }
 
-    /// <summary>"" when logged out.</summary>
     public static string CurrentRole
     {
         get { return (Read(KeyRole) as string) ?? ""; }
@@ -86,17 +79,11 @@ public static class Auth
         s.Clear();
         s.Abandon();
 
-        // Drop the session cookie too, so the next login in this browser gets a new session ID.
         HttpCookie expired = new HttpCookie("ASP.NET_SessionId", "");
         expired.Expires = DateTime.Now.AddDays(-1);
         HttpContext.Current.Response.Cookies.Add(expired);
     }
 
-    /// <summary>
-    /// Re-reads the logged-in user's role and status from the database, so a role change or
-    /// deactivation by an admin takes effect on the user's next page. Returns false (and signs
-    /// out) when the account no longer exists or has been deactivated.
-    /// </summary>
     public static bool RefreshFromDatabase()
     {
         if (!IsLoggedIn) return false;
@@ -113,7 +100,6 @@ public static class Auth
         return true;
     }
 
-    /// <summary>16 random bytes, Base64.</summary>
     public static string NewSalt()
     {
         byte[] salt = new byte[SaltBytes];
@@ -124,7 +110,6 @@ public static class Auth
         return Convert.ToBase64String(salt);
     }
 
-    /// <summary>PBKDF2 with SHA-256, 100,000 rounds, 32-byte result, Base64.</summary>
     public static string HashPassword(string password, string salt)
     {
         using (Rfc2898DeriveBytes kdf = new Rfc2898DeriveBytes(
@@ -134,7 +119,6 @@ public static class Auth
         }
     }
 
-    /// <summary>Checks a password against a stored salt and hash in constant time.</summary>
     public static bool VerifyPassword(string password, string salt, string expectedHash)
     {
         byte[] actual = Convert.FromBase64String(HashPassword(password, salt));
@@ -153,7 +137,6 @@ public static class Auth
         return IsLoggedIn && (recordUserId == CurrentUserId || IsAdmin);
     }
 
-    /// <summary>True for a path on this site ("/Member/TakeQuiz.aspx?id=2"), false for other sites.</summary>
     public static bool IsLocalUrl(string url)
     {
         if (string.IsNullOrEmpty(url)) return false;
@@ -162,7 +145,6 @@ public static class Auth
         return true;
     }
 
-    /// <summary>Where a user lands after logging in when there is no returnUrl.</summary>
     public static string HomeFor(string role)
     {
         return role == RoleAdmin ? "~/Admin/Dashboard.aspx" : "~/Default.aspx";

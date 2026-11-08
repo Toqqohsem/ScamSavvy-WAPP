@@ -1,5 +1,3 @@
-// Owner: Member 2. Keeps Ahmad's baseline behaviour (role refresh on every page, menu set in
-// PreRender, logout) and adds the redesigned layout.
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -8,7 +6,6 @@ using System.Web.UI.WebControls;
 
 public partial class SiteMaster : System.Web.UI.MasterPage
 {
-    // Pages that are not in the menu but belong to a menu item, so that item stays highlighted.
     private static readonly Dictionary<string, string> ParentMenuItem =
         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -18,8 +15,6 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             { "~/Member/QuizResult.aspx", "~/Quizzes.aspx" }
         };
 
-    // Runs before the page's own Init, so every page (public ones too) sees the user's current
-    // role and status, and a deactivated or deleted user is signed out straight away. (Ahmad)
     protected void Page_Init(object sender, EventArgs e)
     {
         if (Auth.IsLoggedIn)
@@ -28,13 +23,12 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         }
     }
 
-    // PreRender runs after the page's click handlers, so the menu reflects a login,
-    // logout or name change made during this request. (Ahmad)
+    // Runs after click handlers, so the menu shows a login or logout from this request
     protected void Page_PreRender(object sender, EventArgs e)
     {
         bool loggedIn = Auth.IsLoggedIn;
 
-        // Show or hide menu groups (menu contract in the build guide)
+        // Show or hide menu groups by role
         phLoggedOut.Visible = !loggedIn;
         phLoggedIn.Visible = loggedIn;
         phMemberLinks.Visible = loggedIn;
@@ -74,7 +68,6 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         }
     }
 
-    // CssClass is kept in ViewState, so only add "active" once across postbacks. (Ahmad)
     private static string WithActive(string css)
     {
         css = css ?? "";

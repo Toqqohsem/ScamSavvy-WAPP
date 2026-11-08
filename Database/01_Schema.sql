@@ -1,17 +1,4 @@
-/* ============================================================================
-   Scam Savvy - 01_Schema.sql                                      Owner: Ahmad
-   Drops and recreates all 14 tables. Running it wipes every table, so run the
-   seed scripts 02 to 08 straight after it, in order.
-
-   How to run: Server Explorer > right-click ScamSavvy.mdf > New Query >
-   paste or open this file > Execute.
-
-   Delete rules (kept exactly as in the build guide, so SQL Server never sees
-   two cascade paths to the same table):
-     CASCADE   : child rows go with the parent
-     SET NULL  : ScamReports.UserID keeps the report when its author is deleted
-     no cascade: the delete is blocked while child rows exist
-   ============================================================================ */
+-- 01_Schema.sql (Ahmad): drops and recreates all 14 tables. Run 02 to 08 after it.
 
 -- Drop in reverse dependency order
 IF OBJECT_ID('dbo.Feedback', 'U') IS NOT NULL DROP TABLE dbo.Feedback;
@@ -42,7 +29,7 @@ CREATE TABLE dbo.Users (
                   CONSTRAINT CK_Users_Role CHECK (Role IN ('Member', 'Contributor', 'Admin')),
     IsActive      BIT NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT 1,
     FailedLogins  INT NOT NULL CONSTRAINT DF_Users_FailedLogins DEFAULT 0,
-    LockoutEnd    DATETIME NULL,   -- set for 15 minutes after 5 failed logins; an admin can clear it early
+    LockoutEnd    DATETIME NULL,
     CreatedAt     DATETIME NOT NULL CONSTRAINT DF_Users_CreatedAt DEFAULT GETDATE()
 );
 GO

@@ -1,5 +1,3 @@
-// Owner: Ahmad. Builds App_Data\ScamSavvy.mdf from the Database scripts the first time the site runs,
-// so the site works on any computer with LocalDB without creating the database by hand.
 using System;
 using System.Data.SqlClient;
 using System.IO;
@@ -12,7 +10,6 @@ public static class DbSetup
     private static readonly object Gate = new object();
     private static bool done;
 
-    /// <summary>Called on every request by Global.asax; does real work only once, when the .mdf is missing.</summary>
     public static void EnsureDatabase()
     {
         if (done) return;

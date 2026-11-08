@@ -1,5 +1,3 @@
-// Owner: Lyu Jiaxin (Member 4)
-// Contributors' and admins' reports go live straight away; members' reports wait for an admin.
 using System;
 using System.Data;
 using System.IO;
@@ -29,7 +27,6 @@ public partial class Member_ReportScam : MemberPage
         BindMine();
     }
 
-    /// <summary>The signed-in user's own reports, newest first, so they can follow the review.</summary>
     private void BindMine()
     {
         DataTable mine = Db.Query(
@@ -104,7 +101,6 @@ public partial class Member_ReportScam : MemberPage
         Response.Redirect("~/ScamDetail.aspx?id=" + Convert.ToInt32(newId) + "&submitted=1", true);
     }
 
-    /// <summary>Saves the screenshot as GUID.ext in Uploads/Evidence and returns its ~/ path, or null.</summary>
     private string SaveEvidence()
     {
         if (!fuEvidence.HasFile) return null;

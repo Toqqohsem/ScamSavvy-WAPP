@@ -1,11 +1,4 @@
-/* =====================================================================
-   04_Seed_Lessons.sql  (owner: Member 2)
-   Six published lessons, one per category (CategoryID 1-6 from 03).
-   Images are committed in ScamSavvy.Web/Uploads/Lessons/seed-*.png.
-   VideoUrl is left NULL: add a YouTube embed URL per lesson from
-   Admin > Lessons (format https://www.youtube.com/embed/VIDEO_ID).
-   Run after 03_Seed_Categories.sql.
-   ===================================================================== */
+-- 04_Seed_Lessons.sql (Arshia): one lesson per category.
 
 SET NOCOUNT ON;
 

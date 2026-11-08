@@ -67,7 +67,7 @@
                 </asp:Repeater>
             </aside>
 
-            <!-- Lesson body: HTML written by admins only (see build guide section 12) -->
+            <!-- Lesson body: HTML written by admins only -->
             <div class="lesson-content">
                 <asp:Literal ID="litContent" runat="server" Mode="PassThrough" />
             </div>
@@ -107,7 +107,7 @@
                 </asp:PlaceHolder>
             </div>
 
-            <!-- Next steps (links agreed in build guide section 9) -->
+            <!-- Next steps -->
             <section class="lesson-next mt-4" aria-labelledby="nextTitle">
                 <h2 id="nextTitle" class="h4">Next steps</h2>
                 <div class="d-flex flex-wrap gap-2">

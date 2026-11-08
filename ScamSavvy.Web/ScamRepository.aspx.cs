@@ -73,7 +73,6 @@ public partial class ScamRepository : System.Web.UI.Page
 
         if (search.Length > 0)
         {
-            // A phone number, account or link is matched exactly after normalising; anything else searches the text.
             List<string> phones = ScamText.FindPhones(search);
             List<string> accounts = ScamText.FindAccounts(search);
             List<string> urls = ScamText.FindUrls(search);
@@ -124,7 +123,6 @@ public partial class ScamRepository : System.Web.UI.Page
         btnNext.Enabled = PageIndex < pages - 1;
     }
 
-    // A SqlParameter can belong to one command only, so each query gets its own copies.
     private static List<SqlParameter> Clone(List<SqlParameter> source)
     {
         List<SqlParameter> copy = new List<SqlParameter>();

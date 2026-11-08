@@ -51,8 +51,6 @@ public partial class Lessons : System.Web.UI.Page
 
     private void BindLessons(int categoryId, string search)
     {
-        // LEFT JOIN on the current user's progress gives the Completed badge.
-        // When logged out, @UserID is 0, which matches no rows, so nothing is marked complete.
         const string sql = @"
             SELECT l.LessonID, l.Title, l.Summary, l.ImagePath, c.Name AS CategoryName,
                    CAST(CASE WHEN lp.LessonID IS NULL THEN 0 ELSE 1 END AS BIT) AS IsCompleted
@@ -90,7 +88,6 @@ public partial class Lessons : System.Web.UI.Page
         }
     }
 
-    // Filters go into the address bar, so a filtered list can be bookmarked or linked to
     private void RedirectWithFilter()
     {
         string url = "~/Lessons.aspx";

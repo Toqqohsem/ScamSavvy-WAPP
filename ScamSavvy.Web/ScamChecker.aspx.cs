@@ -1,9 +1,3 @@
-// Owner: Lyu Jiaxin (Member 4)
-// Checks a pasted message in three ways:
-//   1. phone numbers, account numbers and links already in an approved report (ScamText finds and normalises them);
-//   2. red-flag words and phrases from RedFlagKeywords (English and Bahasa Melayu);
-//   3. adds up the keyword weights for a risk level.
-// The message is never stored.
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -105,7 +99,6 @@ public partial class ScamChecker : System.Web.UI.Page
         return new Regex(@"(?<![\p{L}\p{N}])" + Regex.Escape(keyword) + @"(?![\p{L}\p{N}])", RegexOptions.IgnoreCase);
     }
 
-    /// <summary>Approved reports whose phone, account or link (same domain) appears in the message.</summary>
     private static DataTable FindReportedMatches(string message)
     {
         List<string> phones = ScamText.FindPhones(message);
@@ -124,7 +117,6 @@ public partial class ScamChecker : System.Web.UI.Page
         result.Columns.Add("Raw", typeof(string));
         if (phones.Count + accounts.Count + domains.Count == 0) return result;
 
-        // Parameterised IN lists: one @p per value, never the values themselves in the SQL text.
         List<SqlParameter> ps = new List<SqlParameter>();
         string sql =
             "SELECT ReportID, Title, ScammerPhone, ScammerAccount, ScammerUrl FROM ScamReports " +
@@ -171,11 +163,6 @@ public partial class ScamChecker : System.Web.UI.Page
         return list;
     }
 
-    /// <summary>
-    /// HTML-encodes the message and wraps keyword matches in &lt;mark&gt;. Matches are found on the
-    /// original text and every piece is encoded separately, so nothing the user typed is ever output raw.
-    /// Phone numbers, accounts and links that were already reported get a red mark.
-    /// </summary>
     private string Highlight(string message, List<Regex> flagPatterns, List<string> reportedValues)
     {
         bool[] flagged = new bool[message.Length];

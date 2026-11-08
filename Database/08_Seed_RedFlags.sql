@@ -1,12 +1,4 @@
-/* ============================================================================
-   Scam Savvy - 08_Seed_RedFlags.sql                     Owner: Lyu Jiaxin (Member 4)
-   Words and phrases the Scam Checker looks for, in English and Bahasa Melayu.
-   Weight: 1 = common in scams but also normal messages, 2 = suspicious,
-           3 = very rarely legitimate.
-   The checker adds up the weights: 0-2 Low, 3-5 Medium, 6+ High. Any phone
-   number, account or link already in an approved report makes it High.
-   Run after 07_Seed_ScamReports.sql.
-   ============================================================================ */
+-- 08_Seed_RedFlags.sql (Lyu): warning words used by the Scam Checker.
 
 SET NOCOUNT ON;
 

@@ -32,10 +32,6 @@ public partial class Admin_ManageLessons : AdminPage
         }
     }
 
-    // =====================================================================
-    // Display
-    // =====================================================================
-
     private void LoadCategoryLists()
     {
         DataTable categories = new DataTable();
@@ -116,10 +112,6 @@ public partial class Admin_ManageLessons : AdminPage
         }
     }
 
-    // =====================================================================
-    // Form: open, fill, close
-    // =====================================================================
-
     protected void btnNew_Click(object sender, EventArgs e)
     {
         ClearForm();
@@ -199,13 +191,9 @@ public partial class Admin_ManageLessons : AdminPage
         txtTitle.Focus();
     }
 
-    // =====================================================================
-    // Server-side validation (repeats the client checks; never trust the browser)
-    // =====================================================================
-
     protected void cuvContent_ServerValidate(object source, ServerValidateEventArgs args)
     {
-        // Decode entities first, so "javascript&#58;" is caught too (integration fix)
+        // Decode entities first, so "javascript&#58;" is caught too
         args.IsValid = !UnsafeHtml.IsMatch(HttpUtility.HtmlDecode(args.Value ?? ""));
     }
 
@@ -224,10 +212,6 @@ public partial class Admin_ManageLessons : AdminPage
         // Check the file's first bytes, not just its name, so renamed files are rejected
         args.IsValid = LessonHelpers.DetectImageExtension(fuImage.PostedFile.InputStream) != null;
     }
-
-    // =====================================================================
-    // Insert and update
-    // =====================================================================
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
@@ -322,7 +306,7 @@ public partial class Admin_ManageLessons : AdminPage
             LessonHelpers.DeleteLessonImage(Server, oldImagePath);
         }
 
-        bool published = chkPublished.Checked;   // read before ClearForm() unticks it (integration fix)
+        bool published = chkPublished.Checked;   // read before ClearForm() unticks it
         ClearForm();
         pnlForm.Visible = false;
         BindGrid();
@@ -335,7 +319,7 @@ public partial class Admin_ManageLessons : AdminPage
         string folder = Server.MapPath(LessonHelpers.LessonUploadFolder);
         if (!Directory.Exists(folder))
         {
-            Directory.CreateDirectory(folder); // build guide: create the folder if it is missing
+            Directory.CreateDirectory(folder); // create the folder if it is missing
         }
 
         // Use the extension of the real file type, not the one in the uploaded name
@@ -344,10 +328,6 @@ public partial class Admin_ManageLessons : AdminPage
         fuImage.SaveAs(Path.Combine(folder, fileName));
         return LessonHelpers.LessonUploadFolder + fileName;
     }
-
-    // =====================================================================
-    // Delete
-    // =====================================================================
 
     private void DeleteLesson(int lessonId)
     {
@@ -392,10 +372,6 @@ public partial class Admin_ManageLessons : AdminPage
         BindGrid();
     }
 
-    // =====================================================================
-    // Helpers
-    // =====================================================================
-
     private static string GetImagePath(int lessonId)
     {
         using (SqlConnection conn = Db.Open())
@@ -416,8 +392,6 @@ public partial class Admin_ManageLessons : AdminPage
         }
     }
 
-    // YouTube's Share > Embed adds "?si=..." (a tracking code). Drop everything after "?"
-    // so the stored URL is exactly https://www.youtube.com/embed/VIDEO_ID.
     private static string CleanVideoUrl(string url)
     {
         url = (url ?? "").Trim();

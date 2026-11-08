@@ -5,7 +5,7 @@ using System.Web;
 
 public partial class Member_MyProgress : MemberPage
 {
-    private const int PassMark = 70; // percent, from the build guide
+    private const int PassMark = 70; // percent
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,7 +19,6 @@ public partial class Member_MyProgress : MemberPage
 
     private void LoadProgress()
     {
-        // Every query is filtered by the logged-in user's ID, so users only ever see their own data.
         const string sql = @"
             -- 0. Lesson totals (published lessons only)
             SELECT

@@ -4,23 +4,17 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
 
-/// <summary>
-/// Small helpers shared by the Member 2 pages (home, lessons, progress, admin lessons).
-/// Owner: Member 2. Written in C# 5 syntax so it compiles with any Web Site compiler setting.
-/// </summary>
 public static class LessonHelpers
 {
     public const string LessonUploadFolder = "~/Uploads/Lessons/";
     public const string PlaceholderImage = "~/Images/lesson-placeholder.png";
-    public const int MaxImageBytes = 2 * 1024 * 1024; // 2 MB, from the build guide
+    public const int MaxImageBytes = 2 * 1024 * 1024; // 2 MB
 
-    // Same pattern as section 11 of the build guide
     public static readonly Regex YouTubeEmbed =
         new Regex(@"^https://www\.youtube\.com/embed/[\w-]+$", RegexOptions.Compiled);
 
     private static readonly CultureInfo English = CultureInfo.GetCultureInfo("en-GB");
 
-    /// <summary>Dates on screen use "dd MMM yyyy", e.g. 05 Nov 2026.</summary>
     public static string FormatDate(object value)
     {
         if (value == null || value == DBNull.Value)
@@ -30,7 +24,6 @@ public static class LessonHelpers
         return ((DateTime)value).ToString("dd MMM yyyy", English);
     }
 
-    /// <summary>Turns a stored ImagePath ("~/Uploads/Lessons/x.png") into a browser URL.</summary>
     public static string ImageUrl(object path)
     {
         string p = path as string;
@@ -41,7 +34,6 @@ public static class LessonHelpers
         return VirtualPathUtility.ToAbsolute(p);
     }
 
-    /// <summary>Reads a positive integer from the query string; 0 when missing or invalid.</summary>
     public static int QueryInt(HttpRequest request, string name)
     {
         int value;
@@ -52,20 +44,17 @@ public static class LessonHelpers
         return 0;
     }
 
-    /// <summary>Escapes %, _ and [ so user text is matched literally inside LIKE.</summary>
     public static string EscapeLike(string text)
     {
         return text.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
     }
 
-    /// <summary>Key points are stored one per line; returns the non-empty lines.</summary>
     public static string[] SplitKeyPoints(object text)
     {
         string s = text as string ?? "";
         return s.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
     }
 
-    /// <summary>True when the URL is a plain http(s) link, safe to put in an href.</summary>
     public static bool IsWebUrl(string url)
     {
         Uri uri;
@@ -73,10 +62,6 @@ public static class LessonHelpers
             && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
     }
 
-    /// <summary>
-    /// Checks the first bytes of an upload so a renamed file cannot pass as an image.
-    /// Returns ".jpg" or ".png", or null when the file is not a real JPG/PNG.
-    /// </summary>
     public static string DetectImageExtension(Stream stream)
     {
         byte[] head = new byte[8];
@@ -95,7 +80,6 @@ public static class LessonHelpers
         return null;
     }
 
-    /// <summary>Deletes an uploaded lesson image, ignoring the placeholder and missing files.</summary>
     public static void DeleteLessonImage(HttpServerUtility server, string imagePath)
     {
         if (string.IsNullOrWhiteSpace(imagePath)
@@ -110,7 +94,6 @@ public static class LessonHelpers
         }
     }
 
-    /// <summary>Simple inline SVG icon for each fixed category ID (1-6).</summary>
     public static string CategoryIcon(object categoryId)
     {
         int id = Convert.ToInt32(categoryId);

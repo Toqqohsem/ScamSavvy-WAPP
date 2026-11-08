@@ -1,12 +1,8 @@
-// Owner: Ahmad (Accounts module)
-// The class is LoginPage, not Login, so it never clashes with System.Web.UI.WebControls.Login when the site is published.
 using System;
 using System.Data;
 
 public partial class LoginPage : System.Web.UI.Page
 {
-    // One message for a wrong email, a wrong password and a locked account, so the form never
-    // reveals which emails have accounts.
     private static readonly string FailedMessage = string.Format(
         "Email or password is incorrect. After {0} failed attempts the account is locked for {1} minutes.",
         Auth.MaxFailedLogins, Auth.LockoutMinutes);
@@ -64,8 +60,6 @@ public partial class LoginPage : System.Web.UI.Page
 
         if (!passwordOk)
         {
-            // The 5th failure starts a 15-minute lock and resets the counter for afterwards.
-            // (SQL Server evaluates every SET expression against the row as it was before the update.)
             Db.Execute(
                 "UPDATE Users SET " +
                 " LockoutEnd = CASE WHEN FailedLogins + 1 >= @Max THEN DATEADD(MINUTE, @Minutes, GETDATE()) ELSE LockoutEnd END, " +
