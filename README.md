@@ -9,9 +9,10 @@ The full rules are in **Scam Savvy — Build Guide and Sync Rules** (shared with
 
 1. **Clone:** Visual Studio > *Clone a repository* > `https://github.com/Toqqohsem/ScamSavvy-WAPP.git`
 2. **Open the site:** *File > Open > Web Site* and choose the `ScamSavvy.Web` folder.
-3. **Create the database (first time only):** right-click `App_Data` > *Add > New Item > SQL Server Database*, name it `ScamSavvy.mdf`. (If Visual Studio offers to put it in App_Data, say Yes.)
-4. **Fill it:** in Server Explorer, right-click `ScamSavvy.mdf` > *New Query*. Open and run each script in `Database/` in number order, 01 to 08. Re-run all of them whenever any script changes; 01 wipes every table.
-5. **Run:** Ctrl+F5, then log in with a test account.
+3. **Run:** Ctrl+F5. The first time the site runs it builds `App_Data\ScamSavvy.mdf` from the scripts in `Database/` (01 to 08) automatically; this takes a few seconds and needs SQL Server Express LocalDB, which Visual Studio installs. Then log in with a test account.
+4. **Start again with fresh data:** stop the site, delete `ScamSavvy.mdf` and `ScamSavvy_log.ldf` from `App_Data`, and run it again.
+
+To build the database by hand instead: right-click `App_Data` > *Add > New Item > SQL Server Database*, name it `ScamSavvy.mdf`, then in Server Explorer right-click it > *New Query* and run each script in `Database/` in number order, 01 to 08.
 
 | Email | Role | Password |
 |---|---|---|
